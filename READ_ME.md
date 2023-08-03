@@ -21,7 +21,7 @@ Running commands:
 			gradlew bootRun
 
 Data structure:
--Users
+-Users (forum_user)
 	-User_ID
 		-Specific database Id for the user 
 	-Username
@@ -35,8 +35,11 @@ Data structure:
 		-Users the user is friends with 
 	-Accessible_Rooms
 		-Rooms the user can access 
+		
+	-Status
+		-Is the user currently online/offline?
 	
--Rooms
+-Rooms (forum_room)
 	-Room_ID
 		-Id of the room 
 	-Message_Log
@@ -48,7 +51,7 @@ Data structure:
 	-Room_Password
 		-Password for the room 
 		
--Message 
+-Message (message_log)
 	-Text 
 		-Message body 
 	-Time_stamp
@@ -62,7 +65,7 @@ Stack/Technologies:
 -Backend:
 	Spring Boot/Java
 -Database:
-	Postgres
+	PostgreSQL
 	
 Design:
 	
@@ -84,4 +87,5 @@ Design:
 			View users
 			View rooms 
 	
-		
+Resources:
+https://studygyaan.com/spring-boot/how-to-connect-postgresql-database-in-spring-boot-project

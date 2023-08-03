@@ -4,6 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 
+// room statuses
+public enum activityStatus
+{
+    ONLINE,
+    OFFLINE,
+};
+
 @Entity
 @Table(name = "forumUser")
 public class User {
@@ -25,4 +32,7 @@ public class User {
 
     // list of rooms accessed 
     public ArrayList<String> accessibleRooms;
+
+    // whether a user is online/offline 
+    public activityStatus status;
 }
