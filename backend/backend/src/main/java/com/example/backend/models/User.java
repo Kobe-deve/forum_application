@@ -1,15 +1,9 @@
 package com.example.backend.models;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 
-// room statuses
-public enum activityStatus
-{
-    ONLINE,
-    OFFLINE,
-};
+import com.example.enums.activityStatus;
 
 @Entity
 @Table(name = "forumUser")

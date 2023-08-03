@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.models.User;
-import com.example.backend.models.activityStatus;
 import com.example.backend.repository.UserRepository;
+import com.example.enums.activityStatus;
 
 @Service
 public class UserService {

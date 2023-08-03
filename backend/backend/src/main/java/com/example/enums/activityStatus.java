@@ -1,4 +1,4 @@
-package com.example.backend.models;
+package com.example.enums;
 
 // user statuses
 public enum activityStatus
