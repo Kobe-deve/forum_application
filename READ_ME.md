@@ -9,6 +9,17 @@ A generalized chat web application allowing users to
 -accept friend requests
 -message users they are friends with
 
+Running commands:
+	Frontend:
+		Run:
+			npm start 
+		Test
+			npm test -- --coverage --watchAll=false
+			
+	Backend:
+		Run:
+			gradlew bootRun
+
 Data structure:
 -Users
 	-User_ID
