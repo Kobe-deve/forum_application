@@ -49,7 +49,7 @@ Stack/Technologies:
 -(Desktop) Frontend:
 	React/JavaScript
 -Backend:
-	Django
+	Spring Boot/Java
 -Database:
 	Postgres
 	
