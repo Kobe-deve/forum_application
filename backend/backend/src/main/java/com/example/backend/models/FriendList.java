@@ -13,4 +13,7 @@ public class FriendList {
 
     // id of the friend 
     public Long friend_id;
+
+    // id of message logs relating to directly messaging friends 
+    public Long friend_chat;
 }

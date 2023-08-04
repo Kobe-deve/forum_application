@@ -16,8 +16,11 @@ public class UserController {
 
     // Create a new user
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public String createUser(@RequestBody User user) {
+        if(userService.createUser(user) != null)
+            return "User created!";
+        else
+            return "ERROR: Username exists";
     }
 
     // Get user by ID

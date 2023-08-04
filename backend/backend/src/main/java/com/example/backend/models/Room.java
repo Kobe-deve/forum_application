@@ -24,4 +24,16 @@ public class Room {
 
     // password for the room if it is locked 
     private String password;
+
+    // set password 
+    void setPassword(String set)
+    {
+        this.password = set;
+    }
+
+    // check if input string matches password 
+    boolean matchesPassword(String input)
+    {
+        return this.password.equals(input);
+    }
 }

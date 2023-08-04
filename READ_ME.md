@@ -19,47 +19,8 @@ Running commands:
 	Backend:
 		Run:
 			gradlew bootRun
-
-Data structure:
--Users (forum_user)
-	-User_ID
-		-Specific database Id for the user 
-	-Username
-		-Username of the account 
-	-Password
-		-Password of the account 
-	-Email
-		-Email used for registration 
-
-	-Friends
-		-Users the user is friends with 
-	-Accessible_Rooms
-		-Rooms the user can access 
-		
-	-Status
-		-Is the user currently online/offline?
-	
--Rooms (forum_room)
-	-Room_ID
-		-Id of the room 
-	-Message_Log
-		-Log of all messages sent 
-	-Time_Created
-		-The time the room was created
-	-Active_status
-		-Whether the room is open/locked/closed
-	-Room_Password
-		-Password for the room 
-		
--Message (message_log)
-	-Text 
-		-Message body 
-	-Time_stamp
-		-When the message was sent 
-	-User_ID
-		-The id of the user who sent the message 
-	-Room_ID
-		-The room the message is in, acts as a foreign key
+		Test
+			gradlew test 
 
 Stack/Technologies:
 -(Desktop) Frontend:
@@ -91,3 +52,4 @@ Design:
 	
 Resources:
 https://studygyaan.com/spring-boot/how-to-connect-postgresql-database-in-spring-boot-project
+https://www.amarjanica.com/externalize-sql-statements-in-java

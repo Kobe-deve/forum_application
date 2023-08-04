@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,17 @@ public class UserService {
 
     // Create a new user
     public User createUser(User user) {
-        user.status = activityStatus.OFFLINE;
-        return UserRepository.save(user);
+        // check if the username exists
+        if(UserRepository.findByUsername(user.username).size() > 0)
+            return null;
+        else
+        {
+            // set intial values
+            user.status = activityStatus.OFFLINE;
+            user.time_stamp = new Date();
+            
+            return UserRepository.save(user);
+        }
     }
 
     // Get user by ID
