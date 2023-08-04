@@ -42,6 +42,8 @@ Design:
 		Logged In:
 			Dashboard
 			Chatroom
+			Create Room 
+			Join Room
 			Friends Page 
 			Friend Chat 
 			Settings 

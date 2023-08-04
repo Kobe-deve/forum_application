@@ -23,7 +23,6 @@ public class LoginController {
         // check if username exists 
         if(usernames.size() == 1 && user.password.equals(usernames.get(0).password))
         {
-            
             return true;
         }
         else
