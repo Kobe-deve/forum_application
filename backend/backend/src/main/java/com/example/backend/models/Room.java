@@ -2,15 +2,9 @@ package com.example.backend.models;
 
 import java.util.Date;
 
-import jakarta.persistence.*;
+import com.example.enums.activeStatus;
 
-// room statuses
-enum activeStatus
-{
-    OPEN,
-    LOCKED,
-    CLOSED,
-};
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "forumRoom")
@@ -21,10 +15,13 @@ public class Room {
 
     // creation date of the room 
     public Date time_created;
+
+    // id for message log
+    public Long message_log_id;
     
     // room status 
     public activeStatus status;
 
     // password for the room if it is locked 
-    public String password;
+    private String password;
 }

@@ -7,7 +7,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "messageLog")
 public class Message {
+    // id used to determine which chat this belongs to 
     @Id
+    private Long id;
+
     // time information of when the message was sent 
     public Date time_stamp;
 
@@ -15,5 +18,5 @@ public class Message {
     public String text;
     
     // id of the user who sent the message 
-    public String user_id;
+    public Long user_id;
 }

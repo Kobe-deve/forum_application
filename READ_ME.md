@@ -58,6 +58,8 @@ Data structure:
 		-When the message was sent 
 	-User_ID
 		-The id of the user who sent the message 
+	-Room_ID
+		-The room the message is in, acts as a foreign key
 
 Stack/Technologies:
 -(Desktop) Frontend:

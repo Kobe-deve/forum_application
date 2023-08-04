@@ -1,7 +1,8 @@
 package com.example.backend.models;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
+
+import java.util.Date;
 
 import com.example.enums.activityStatus;
 
@@ -21,11 +22,11 @@ public class User {
     // email for registration
     public String email;
 
-    // list of friends 
-    public ArrayList<Long> friendsList;
+    // account creation date
+    public Date time_stamp;
 
-    // list of rooms accessed 
-    public ArrayList<String> accessibleRooms;
+    // id for friends list 
+    public Long friendsList;
 
     // whether a user is online/offline 
     public activityStatus status;
