@@ -50,9 +50,9 @@ public class UserController {
     // Get user by ID
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "{$UserController.getUserById}", response = User.class, authorizations = {@Authorization(value="apiKey")})
-    @ApiResponses(value = {//
-        @ApiResponse(code = 400, message = "Something went wrong"), //
-        @ApiResponse(code = 403, message = "Access denied"), //
+    @ApiResponses(value = {
+        @ApiResponse(code = 400, message = "Something went wrong"), 
+        @ApiResponse(code = 403, message = "Access denied"), 
         @ApiResponse(code = 500, message = "Expired or invalid JWT token")})
     public Optional<User> getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
