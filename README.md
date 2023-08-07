@@ -1,6 +1,6 @@
-Overview:
+# Overview:
 
-A generalized chat web application allowing users to: 
+### A generalized chat web application allowing users to:  
 
 	-create an account
 	-log in
@@ -10,7 +10,7 @@ A generalized chat web application allowing users to:
 	-accept friend requests
 	-message users they are friends with
 
-Running commands:
+### Running commands:
 
 	Frontend:
 		Run:
@@ -24,16 +24,17 @@ Running commands:
 		Test
 			gradlew test 
 
-Stack/Technologies:
--(Desktop) Frontend:
-	React/JavaScript
--Backend:
-	Spring Boot/Java
--Database:
-	PostgreSQL
+### Stack/Technologies:
+
+	-(Desktop) Frontend:
+		React/JavaScript
+	-Backend:
+		Spring Boot/Java
+	-Database:
+		PostgreSQL
 	
 	
-Resources:
+### Resources:
 - https://studygyaan.com/spring-boot/how-to-connect-postgresql-database-in-spring-boot-project
 - https://www.amarjanica.com/externalize-sql-statements-in-java
 - https://medium.com/@xoor/jwt-authentication-service-44658409e12c
