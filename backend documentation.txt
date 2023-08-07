@@ -1,0 +1,125 @@
+Functionality:
+
+	User:
+		-Create a new user
+		-Verify account (accessed from email after creating an account)
+		
+		-Login to an account
+		-Logout if the user is logged in 
+	
+		-Get information on a user 
+		
+	Chatrooms:
+		-Get list of chatrooms the user can access
+		-Enter chatroom
+		-Create a chatroom 
+		-Close a room you created 
+		
+		(Private rooms)
+		-Request to be added to a chatroom through entering an id and password
+		-Add a user to a chatroom's list 
+		-Kick user from a private room 
+		
+		
+	Friends:
+		-Get list of friends 
+		-Send friend request
+		-Message a friend
+		-Remove a user from the friend list 
+	
+	Messages:
+		-Get all messages in a chat room that the user is in 
+		-Send a message in a chat room the user is currently in
+		-Report a message 
+	
+	Admin:
+		-Suspend rooms 
+		-Suspend users
+
+Endpoints:
+
+	/message
+	/message/{message_log_id} - GET - Authorization 
+		-Returns all messages in the message log identified with message_log_id 
+	/message/send - POST - Authorization
+		-Sends a message 
+		-BODY:		
+			{
+				"room_id": (current room)
+				"text": (message text)
+				"user_id": (the user who is sending the message)
+			}
+	/message/report - POST - Authorization 
+		-Sends a report of a message 
+		-BODY:
+			{
+				"message_id": (id of message reported)
+				"report_text": (text of report)
+			}
+	-------------------------------------------------------------------------------------	
+	
+	/room
+	/room/{room_id} - GET - Authorization 
+	/room/createRoom - POST - Authorization
+		-BODY:
+			{
+				"roomName": (the name of the room being created)
+				"status": (status for whether the room is open or private)
+			}
+	
+	-------------------------------------------------------------------------------------
+
+	/users
+	/users/{id} - GET - Authorization
+		-get information on a user 
+	/users/login - POST
+		-logging in 
+		-BODY:	
+			{
+				"username":
+				"password":
+			}
+	/users/signup - POST
+		-creating a new user 
+		-BODY:
+			{
+				"username": (username used)
+				"password": (password used)
+				"email": (email used)
+			}
+	/users/verify/{user_id} - GET 
+		-email verification link 
+	
+	-------------------------------------------------------------------------------------
+
+	/friends
+	/friends/list - GET - Authorization
+		-Get the list of users that the current user has added as friends 
+	/friends/requests - GET - Authorization
+		-Get all requests being sent to the current user 
+	/friends/request/{user_id} - POST - Authorization
+		-Send a friend request to a user 
+		-BODY:
+			{
+				"user_id":(id of the user who is being added)
+			}
+	/friends/remove/{user_id} - POST - Authorization
+		-Remove a user from the friend list 
+		-BODY:
+		{
+			"user_id":(id of the user who is removed from the friend list)
+		}
+	
+	-------------------------------------------------------------------------------------
+
+	/admin/room/{room_id} - POST - Authorization
+	/admin/user/{user_id} - POST - Authorization 
+	
+	-------------------------------------------------------------------------------------
+
+State data in JWT token payload:
+
+	-User ID
+		-The id of the user who is accessing the application 
+	-Current Room ID 
+		-What room the user is in on the application 

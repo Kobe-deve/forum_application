@@ -6,14 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import com.example.backend.models.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.service.UserService;
+import com.example.enums.activityStatus;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.Authorization;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -50,11 +48,22 @@ public class UserController {
     // Get user by ID
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "{$UserController.getUserById}", response = User.class, authorizations = {@Authorization(value="apiKey")})
-    @ApiResponses(value = {
-        @ApiResponse(code = 400, message = "Something went wrong"), 
-        @ApiResponse(code = 403, message = "Access denied"), 
-        @ApiResponse(code = 500, message = "Expired or invalid JWT token")})
-    public Optional<User> getUserById(@PathVariable("id") Long id) {
+    public User getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
+    }
+
+    // verify a user so they can access their account
+    @GetMapping("/verify/{user_id}")
+    public String verifyUser(@PathVariable("user_id") Long id)
+    {
+        User verifyUser = userService.getUserById(id);
+
+        if(verifyUser != null && verifyUser.status == activityStatus.UNVERIFIED)
+        {
+            verifyUser.status = activityStatus.OFFLINE;
+            return "User verified";
+        }
+        
+        return "ERROR: Could not verify user";
     }
 }

@@ -23,7 +23,7 @@ public class UserService {
         else
         {
             // set intial values
-            user.status = activityStatus.OFFLINE;
+            user.status = activityStatus.UNVERIFIED;
             user.time_stamp = new Date();
             
             // generate friends list id for future use
@@ -34,7 +34,11 @@ public class UserService {
     }
 
     // Get user by ID
-    public Optional<User> getUserById(Long id) {
-        return UserRepository.findById(id);
+    public User getUserById(Long id) {
+        Optional<User> getUser = UserRepository.findById(id);
+        if(getUser != null)
+            return getUser.get();
+        else
+            return null;
     }
 }

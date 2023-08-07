@@ -25,6 +25,9 @@ public class Room {
     // room name
     public String roomName;
 
+    // id of the user who created the room 
+    public Long creator_id;
+
     // password for the room if it is locked 
     private String password;
 

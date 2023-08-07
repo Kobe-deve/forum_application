@@ -4,5 +4,6 @@ package com.example.enums;
 public enum activityStatus
 {
     ONLINE,
+    UNVERIFIED,
     OFFLINE
 };

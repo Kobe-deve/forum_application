@@ -11,6 +11,6 @@ import com.example.backend.models.Message;
 @Component("MessageLogRepository")
 public interface MessageLogRepository extends JpaRepository<Message, Long> {
     // get messages by message id 
-    @Query(value = "SELECT * FROM message_log WHERE id = ?1", nativeQuery=true)
+    @Query(value = "SELECT * FROM message_log WHERE room_id = ?1", nativeQuery=true)
     List<Message> getMessages(Long id);
 }
