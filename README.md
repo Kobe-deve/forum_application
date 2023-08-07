@@ -1,15 +1,17 @@
 Overview:
 
 A generalized chat web application allowing users to: 
--create an account
--log in
--enter rooms through public rooms or private rooms that can be accessed with a code
--send text messages in rooms
--send friend requests to users
--accept friend requests
--message users they are friends with
+
+	-create an account
+	-log in
+	-enter rooms through public rooms or private rooms that can be accessed with a code
+	-send text messages in rooms
+	-send friend requests to users
+	-accept friend requests
+	-message users they are friends with
 
 Running commands:
+
 	Frontend:
 		Run:
 			npm start 
