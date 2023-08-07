@@ -1,6 +1,6 @@
 Overview:
 
-A generalized chat web application allowing users to 
+A generalized chat web application allowing users to: 
 -create an account
 -log in
 -enter rooms through public rooms or private rooms that can be accessed with a code
