@@ -35,6 +35,13 @@ public class MessageLogController {
         return MessageLogRepository.getMessages(id);
     }
 
+    // get the most recent message in the message log
+    @GetMapping("/recent/{message_log_id}")
+    public Message getRecentMessage(@PathVariable("message_log_id") Long id)
+    {
+        return MessageLogRepository.getMessages(id).get(0);
+    }
+
     // sending a message to a chat 
     @PostMapping("/send")
     @ApiOperation(value = "{$MessageLogController.sendMessage}", response = User.class, authorizations = {@Authorization(value="apiKey")})

@@ -56,11 +56,14 @@ Endpoints:
 				"message_id": (id of message reported)
 				"report_text": (text of report)
 			}
+	/message/recent - GET - Authorization
+		-Get the most recent message in the message log 
+	
 	-------------------------------------------------------------------------------------	
 	
-	/room
-	/room/{room_id} - GET - Authorization 
-	/room/createRoom - POST - Authorization
+	/rooms
+	/rooms/{room_id} - GET - Authorization 
+	/rooms/createRoom - POST - Authorization
 		-BODY:
 			{
 				"roomName": (the name of the room being created)
@@ -98,17 +101,9 @@ Endpoints:
 	/friends/requests - GET - Authorization
 		-Get all requests being sent to the current user 
 	/friends/request/{user_id} - POST - Authorization
-		-Send a friend request to a user 
-		-BODY:
-			{
-				"user_id":(id of the user who is being added)
-			}
+		-Send a friend request to a user of {user_id}
 	/friends/remove/{user_id} - POST - Authorization
 		-Remove a user from the friend list 
-		-BODY:
-		{
-			"user_id":(id of the user who is removed from the friend list)
-		}
 	
 	-------------------------------------------------------------------------------------
 
