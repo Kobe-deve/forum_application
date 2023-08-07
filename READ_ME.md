@@ -55,3 +55,4 @@ Design:
 Resources:
 https://studygyaan.com/spring-boot/how-to-connect-postgresql-database-in-spring-boot-project
 https://www.amarjanica.com/externalize-sql-statements-in-java
+https://medium.com/@xoor/jwt-authentication-service-44658409e12c

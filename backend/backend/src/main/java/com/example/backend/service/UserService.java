@@ -18,7 +18,7 @@ public class UserService {
     // Create a new user
     public User createUser(User user) {
         // check if the username exists
-        if(UserRepository.findByUsername(user.username).size() > 0)
+        if(user.password.length() < 5 & UserRepository.findByUsername(user.username).size() > 0)
             return null;
         else
         {
@@ -26,6 +26,9 @@ public class UserService {
             user.status = activityStatus.OFFLINE;
             user.time_stamp = new Date();
             
+            // generate friends list id for future use
+            user.friendsList = user.time_stamp.getTime();
+
             return UserRepository.save(user);
         }
     }
