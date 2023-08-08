@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.backend.models.User;
 import com.example.backend.repository.UserRepository;
+import com.example.backend.security.JWT_Token;
 import com.example.backend.service.UserService;
 import com.example.enums.activityStatus;
 
@@ -21,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserRepository UserRepository;
+
+    @Autowired
+    private JWT_Token JWT_Token;
 
     // Create a new user
     @PostMapping("/login")
@@ -39,6 +43,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(@RequestBody User user) {
+        System.out.println(JWT_Token.displaySig());
         if(userService.createUser(user) != null)
             return "User created!";
         else
