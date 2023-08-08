@@ -30,4 +30,9 @@ public class User {
 
     // whether a user is online/offline 
     public activityStatus status;
+
+    public Long getID()
+    {
+        return id;
+    }
 }

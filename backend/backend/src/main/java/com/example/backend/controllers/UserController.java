@@ -28,24 +28,23 @@ public class UserController {
 
     // Create a new user
     @PostMapping("/login")
-    public boolean loginWithCredentials(@RequestBody User user)
+    public String loginWithCredentials(@RequestBody User user)
     {
         List<User> usernames = UserRepository.findByUsername(user.username);
 
         // check if username exists 
         if(usernames.size() == 1 && user.password.equals(usernames.get(0).password))
         {
-            return true;
+            return JWT_Token.generateJWT(user.username,null).toString();
         }
         else
-            return false;
+            return "ERROR: Could not login";
     }
 
     @PostMapping("/signup")
     public String createUser(@RequestBody User user) {
-        System.out.println(JWT_Token.displaySig());
         if(userService.createUser(user) != null)
-            return "User created!";
+            return JWT_Token.generateJWT(user.username,null).toString();
         else
             return "ERROR: Username exists";
     }
