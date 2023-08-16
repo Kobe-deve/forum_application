@@ -10,6 +10,11 @@
 	-accept friend requests
 	-message users they are friends with
 
+### Local Hosting port setup
+	Frontend: 3000 (modify 'start' command in forum_application\frontend\package.json)
+	Backend: 8081 (forum_application\backend\backend\src\main\resources\application.properties)
+	Database: 5432 (Postgres setup)
+
 ### Running commands:
 
 	Frontend:
@@ -34,7 +39,8 @@
 		PostgreSQL
 	
 	
-### Resources:
+### Resources (for ideas/info on implementation):
 - https://studygyaan.com/spring-boot/how-to-connect-postgresql-database-in-spring-boot-project
 - https://www.amarjanica.com/externalize-sql-statements-in-java
 - https://medium.com/@xoor/jwt-authentication-service-44658409e12c
+https://medium.com/@davidtranwd/login-flow-with-react-and-redux-9a7d07be270e
