@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from '../pages/App';
 
-test('renders front page', () => {
+test('app renders', () => {
   render(<App />);
-  const linkElement = screen.getByText(/front page/i);
+  const linkElement = screen.getByLabelText("front-page");
   expect(linkElement).toBeInTheDocument();
 });

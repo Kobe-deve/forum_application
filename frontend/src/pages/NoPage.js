@@ -1,6 +1,6 @@
 export function NoPage() {
     return (
-      <div>
+      <div aria-label='no-page'>
         No Page Found
       </div>
     );

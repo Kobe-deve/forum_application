@@ -1,6 +1,6 @@
 export function Login() {
     return (
-      <div>
+      <div aria-label='login'>
         Login
       </div>
     );

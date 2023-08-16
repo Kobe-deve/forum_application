@@ -1,6 +1,6 @@
 export function FrontPage() {
     return (
-      <div>
+      <div aria-label='front-page'>
         Front Page
       </div>
     );

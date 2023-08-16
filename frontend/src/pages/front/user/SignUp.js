@@ -1,6 +1,6 @@
 export function SignUp() {
     return (
-      <div>
+      <div aria-label='signup'>
         Create User
       </div>
     );
