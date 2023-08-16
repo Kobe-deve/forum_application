@@ -6,9 +6,8 @@ import SignUp from "../pages/front/user/SignUp.js"
 import Home from '../pages/loggedin/Home.js'
 import NoPage from "../pages/NoPage.js"
 
-class App extends Component {
-  render(){
-    return (
+export function App(){
+  return (
       <BrowserRouter>
         <Routes>
           <Route index element={<FrontPage />} />
@@ -19,7 +18,4 @@ class App extends Component {
         </Routes>
       </BrowserRouter>
     );
-  }
 }
-
-export default App;

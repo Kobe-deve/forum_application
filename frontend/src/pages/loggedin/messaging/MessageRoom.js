@@ -1,13 +1,7 @@
-import React, { Component } from 'react';
-
-class MessageRoom extends Component {
-    render() {
-      return(
+export function MessageRoom() {
+    return(
         <div aria-label='message-room'>
           Messaging
         </div>
       );
-    };
 }
-
-export default MessageRoom;

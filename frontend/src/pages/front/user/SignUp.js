@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-
-class SignUp extends Component {
+export function SignUp(){
     
-    render() {
-      return (
-      <div aria-label='signup'>
-        Create User
-      </div>
-      )
-    }
+  return(
+      <form aria-label='signup' name="signupForm">
+        Create Account
+        <input type="text" id='username' placeholder='Username'/>
+        <input type="text" id='email' placeholder='Email'/>
+        <input type="password" id='password' placeholder='Password'/>
+        <input type="password" id='password-confirm' placeholder='Confirm Password'/>
+        <input type="submit" value="Login"/>
+      </form>
+    );
 }
-
-export default SignUp;

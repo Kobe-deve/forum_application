@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import { useEffect, useState } from "react";
 
-class RoomList extends Component 
+export function RoomList()
 {
-  render() {
-    return (
+  const [roomList,setRoomList] = useState([]);
+  
+  useEffect(()=>{
+    
+  })
+
+  return (
       <div aria-label='room-list'>
         Rooms
       </div>
     );
-  }
 }
-
-export default RoomList;

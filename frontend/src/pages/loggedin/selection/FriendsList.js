@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
-
-class FriendsList extends Component 
+export function FriendsList()
 {
-  render() {
-    return (
+  return (
       <div aria-label='friends-list'>
         Friends
       </div>
     );
-  }
 }
-
-export default FriendsList;

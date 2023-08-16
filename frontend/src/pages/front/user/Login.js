@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+export function Login() {
 
-class Login extends Component {
-
-  render() {
-    return(
+  return(
     <form aria-label='login' name="loginForm">
         Login
+        <input type="text" placeholder='Username'/>
+        <input type="password" placeholder='Password'/>
         <input type="submit" value="Login"/>
       </form>
-    )
-  }
+    );
 }
-
-export default Login;

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 
-class Home extends Component 
+export function Home()
 {
-  render() {
-    return (
+  return (
       <div aria-label='home'>
         Home
       </div>
     );
-  }
 }
-
-export default Home;
