@@ -11,7 +11,6 @@ export default function Login() {
   const [loginError,setErrorLogin] = useState(false);
 
   const submitLogin = (e) => {
-    console.log(username + " " + password);
     setSuccessLogin(false);
     setPendingLogin(true);
     setErrorLogin(false);

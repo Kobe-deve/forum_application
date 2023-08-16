@@ -2,7 +2,7 @@
 var host = "http://localhost:8081"
 
 // holds all urls to access
-var urls = {
+export var urls = {
     "LOGIN": host+"/users/login",
     "SIGNUP": host+"/users/signup",
     "USER_INFO": host+"/users/",
