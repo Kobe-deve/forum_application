@@ -1,7 +1,15 @@
-export function Login() {
-    return (
-      <div aria-label='login'>
+import React, { Component } from 'react';
+
+class Login extends Component {
+
+  render() {
+    return(
+    <form aria-label='login' name="loginForm">
         Login
-      </div>
-    );
+        <input type="submit" value="Login"/>
+      </form>
+    )
   }
+}
+
+export default Login;

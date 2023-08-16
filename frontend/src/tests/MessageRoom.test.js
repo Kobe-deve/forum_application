@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import {MessageRoom} from '../pages/loggedin/messaging/MessageRoom';
+import MessageRoom from '../pages/loggedin/messaging/MessageRoom';
 
 test('renders message room page', () => {
     render(<MessageRoom />);

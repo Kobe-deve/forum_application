@@ -41,4 +41,11 @@ public class FriendListController {
     {
         return "Friend removed";
     }
+
+    // accept friend request
+    @PostMapping("/accept/{user_id}")
+    public String acceptFriendRequest(@PathVariable("user_id") Long id)
+    {
+        return "Friend added";
+    }
 }

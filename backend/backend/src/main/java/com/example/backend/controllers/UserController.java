@@ -43,6 +43,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(@RequestBody User user) {
+        
         if(userService.createUser(user) != null)
             return JWT_Token.generateJWT(user.username,null).toString();
         else

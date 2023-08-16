@@ -1,7 +1,13 @@
-export function FrontPage() {
-    return (
+import React, { Component } from 'react';
+
+class FrontPage extends Component {
+    
+    render() {
+      return(
       <div aria-label='front-page'>
         Front Page
-      </div>
-    );
-  }
+      </div>)
+    }
+}
+
+export default FrontPage;

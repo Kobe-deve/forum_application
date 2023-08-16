@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import {NoPage} from '../pages/NoPage';
+import NoPage from '../pages/NoPage';
 
 test('renders no page available page', () => {
     render(<NoPage />);
