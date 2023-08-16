@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
 
-export function Header() {
+export default function Header() {
     return(<></>);
 }

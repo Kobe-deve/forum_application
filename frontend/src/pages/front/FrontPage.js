@@ -1,4 +1,4 @@
-export function FrontPage(){
+export default function FrontPage(){
     
     return(
       <div aria-label='front-page'>

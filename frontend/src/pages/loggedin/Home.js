@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-
-export function Home()
+export default function Home()
 {
   return (
       <div aria-label='home'>

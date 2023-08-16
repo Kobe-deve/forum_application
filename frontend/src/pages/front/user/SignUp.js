@@ -1,4 +1,4 @@
-export function SignUp(){
+export default function SignUp(){
     
   return(
       <form aria-label='signup' name="signupForm">

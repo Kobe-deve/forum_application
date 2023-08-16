@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { Component } from 'react';
 import FrontPage from "../pages/front/FrontPage.js"
 import Login from "../pages/front/user/Login.js"
 import SignUp from "../pages/front/user/SignUp.js"
 import Home from '../pages/loggedin/Home.js'
 import NoPage from "../pages/NoPage.js"
 
-export function App(){
+export default function App(){
   return (
       <BrowserRouter>
         <Routes>

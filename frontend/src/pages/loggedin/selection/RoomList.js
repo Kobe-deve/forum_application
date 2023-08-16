@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function RoomList()
+export default function RoomList()
 {
   const [roomList,setRoomList] = useState([]);
   

@@ -1,4 +1,4 @@
-export function FriendsList()
+export default function FriendsList()
 {
   return (
       <div aria-label='friends-list'>

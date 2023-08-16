@@ -1,4 +1,4 @@
-export function MessageRoom() {
+export default function MessageRoom() {
     return(
         <div aria-label='message-room'>
           Messaging
