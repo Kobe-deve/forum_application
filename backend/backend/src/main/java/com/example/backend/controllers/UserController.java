@@ -50,12 +50,18 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String createUser(@RequestBody User user) {
+    public ArrayList<String> createUser(@RequestBody User user) {
         
-        if(userService.createUser(user) != null)
-            return JWT_Token.generateJWT(user.username,null).toString();
+        List<User> usernames = UserRepository.findByUsername(user.username);
+
+        ArrayList<String> returnData = new ArrayList<String>();
+
+        if(usernames.size() == 0 && userService.createUser(user) != null)
+            returnData.add("User created!");
         else
-            return "ERROR: Username exists";
+            returnData.add("ERROR: Username exists");
+        
+        return returnData;
     }
 
     // Get user by ID

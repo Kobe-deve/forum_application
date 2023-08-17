@@ -29,7 +29,6 @@ export default function Login() {
       if (!error) {
         setSuccessLogin(true);
       } else {
-        console.log(error);
         setResponseError(error.message);
         setErrorLogin(true);
       }
