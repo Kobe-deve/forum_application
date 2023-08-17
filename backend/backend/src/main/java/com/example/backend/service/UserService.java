@@ -23,7 +23,8 @@ public class UserService {
         else
         {
             // set intial values
-            user.status = activityStatus.UNVERIFIED;
+            // TODO set to UNVERIFIED when adding email verification
+            user.status = activityStatus.OFFLINE;
             user.time_stamp = new Date();
             
             // generate friends list id for future use
