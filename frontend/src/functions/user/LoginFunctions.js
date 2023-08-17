@@ -28,6 +28,10 @@ export async function callLogin(username, password, callback)
                 {
                     return callback(new Error('Invalid username or password'));
                 }
+                else if(postResponse[0] === "ERROR: The account is not verified") // check if the user is verified
+                {
+                    return callback(new Error('Account is not verified'));
+                }
                 else
                 {
                     userData["JWT"] = postResponse[0];

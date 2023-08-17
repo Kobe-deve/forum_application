@@ -2,10 +2,12 @@ package com.example.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.backend.models.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.security.JWT_Token;
+import com.example.backend.service.MailService;
 import com.example.backend.service.UserService;
 import com.example.enums.activityStatus;
 
@@ -18,6 +20,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
+    private MailService emailSender;
+
     @Autowired
     private UserService userService;
 
@@ -35,11 +40,15 @@ public class UserController {
 
         ArrayList<String> returnData = new ArrayList<String>();
 
-        // check if username exists 
-        if(usernames.size() == 1 && user.password.equals(usernames.get(0).password))
+        // check if username exists or is a verified account
+        if(usernames.size() == 1 && user.password.equals(usernames.get(0).password) && usernames.get(0).status != activityStatus.UNVERIFIED)
         {
             returnData.add(JWT_Token.generateJWT(user.username,null).toString());
             returnData.add(user.username);
+        }
+        else if(usernames.get(0).status == activityStatus.UNVERIFIED)
+        {
+            returnData.add("ERROR: The account is not verified");
         }
         else
         {
@@ -51,13 +60,30 @@ public class UserController {
 
     @PostMapping("/signup")
     public ArrayList<String> createUser(@RequestBody User user) {
-        
+
         List<User> usernames = UserRepository.findByUsername(user.username);
 
         ArrayList<String> returnData = new ArrayList<String>();
 
         if(usernames.size() == 0 && userService.createUser(user) != null)
-            returnData.add("User created!");
+        {
+            String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
+            
+            // send verification link email
+            try{
+                // TODO add email service
+                // emailSender.sendEmail(user.email,"Verification Link",verificationLink);
+                
+                // temporarily removing unverified since SMTP isn't set up
+                user.status = activityStatus.OFFLINE;
+
+                returnData.add("User created!");
+            }
+            catch(Error e) // catch if email could not send
+            {
+                returnData.add("ERROR: Could not send verification email");
+            }
+        }
         else
             returnData.add("ERROR: Username exists");
         

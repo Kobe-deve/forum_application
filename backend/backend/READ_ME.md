@@ -10,4 +10,11 @@ spring.datasource.password=(postgres password)
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.hibernate.ddl-auto=(Create - create new database, update - update database)
  
+mail.host=(smt host endpoint)
+mail.port=(smt port)
+mail.username=(smt username)
+mail.password=(smt password)
+mail.properties.mail.smtp.auth=true
+mail.properties.mail.smtp.starttls.enable=true
+
 jwt.signature = (String for secret)
