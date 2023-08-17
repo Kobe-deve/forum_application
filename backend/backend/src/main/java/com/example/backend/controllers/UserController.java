@@ -12,6 +12,7 @@ import com.example.enums.activityStatus;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,19 +27,26 @@ public class UserController {
     @Autowired
     private JWT_Token JWT_Token;
 
-    // Create a new user
+    // Login to an account
     @PostMapping("/login")
-    public String loginWithCredentials(@RequestBody User user)
+    public ArrayList<String> loginWithCredentials(@RequestBody User user)
     {
         List<User> usernames = UserRepository.findByUsername(user.username);
+
+        ArrayList<String> returnData = new ArrayList<String>();
 
         // check if username exists 
         if(usernames.size() == 1 && user.password.equals(usernames.get(0).password))
         {
-            return JWT_Token.generateJWT(user.username,null).toString();
+            returnData.add(JWT_Token.generateJWT(user.username,null).toString());
+            returnData.add(user.username);
         }
         else
-            return "ERROR: Could not login";
+        {
+            returnData.add("ERROR: Could not login");
+        }
+        
+        return returnData;
     }
 
     @PostMapping("/signup")

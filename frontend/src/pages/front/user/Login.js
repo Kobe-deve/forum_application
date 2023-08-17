@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import {callLogin} from '../../../functions/user/LoginFunctions';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+
+  const navigate = useNavigate();
 
   const [username,setUsername] = useState("");
   const [password,setPassword] = useState("");
@@ -9,6 +12,12 @@ export default function Login() {
   const [pendingLogin,setPendingLogin] = useState(false);
   const [successLogin,setSuccessLogin] = useState(false);
   const [loginError,setErrorLogin] = useState(false);
+  const [responseError,setResponseError] = useState("");
+
+  useEffect(()=>{
+    if(successLogin)
+      navigate("/home");
+  })
 
   const submitLogin = (e) => {
     setSuccessLogin(false);
@@ -20,7 +29,9 @@ export default function Login() {
       if (!error) {
         setSuccessLogin(true);
       } else {
-        setErrorLogin(error);
+        console.log(error);
+        setResponseError(error.message);
+        setErrorLogin(true);
       }
     });
     
@@ -37,7 +48,7 @@ export default function Login() {
 
         {pendingLogin && <div>Logging in...</div>}
         {successLogin && <div>Logged in</div>}
-        {loginError && <div>Could not log in</div>}
+        {loginError && <div>Could not log in: {responseError} </div>}
       </form>
     );
 }
