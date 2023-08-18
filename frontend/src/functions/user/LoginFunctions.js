@@ -1,6 +1,25 @@
 import * as AuthenticationInfo from '../../information/Authentication'
 import * as EndpointInfo from '../../information/Endpoints'
-import { userData } from '../../information/UserData';
+import { userData, setUserData } from '../../information/UserData';
+
+// verifying jwt token
+export async function callAuth(token, callback)
+{
+    try{
+        fetch(EndpointInfo.urls["AUTHENTICATE"], {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({"Token":token})            
+            })
+    }
+    catch(error)
+    {
+
+    }
+}
 
 // calling login endpoint
 export async function callLogin(username, password, callback)
@@ -24,22 +43,24 @@ export async function callLogin(username, password, callback)
                 .then(async (responseData) => { // if successfully logged in, establish user
                     let postResponse = await responseData.json();
 
-                if(postResponse[0] === "ERROR: Could not login") // check if the user is correct
-                {
-                    return callback(new Error('Invalid username or password'));
-                }
-                else if(postResponse[0] === "ERROR: The account is not verified") // check if the user is verified
-                {
-                    return callback(new Error('Account is not verified'));
-                }
-                else
-                {
-                    userData["JWT"] = postResponse[0];
-                    userData["Username"] = postResponse[1];
+                    if(postResponse[0] === "ERROR: Could not login") // check if the user is correct
+                    {
+                        return callback(new Error('Invalid username or password'));
+                    }
+                    else if(postResponse[0] === "ERROR: The account is not verified") // check if the user is verified
+                    {
+                        return callback(new Error('Account is not verified'));
+                    }
+                    else
+                    {
+                        userData["JWT"] = postResponse[0];
+                        userData["Username"] = postResponse[1];
+                        userData["LoggedIn"] = true;
+                        setUserData(postResponse[0],postResponse[1],"",-1,-1);
 
-                    return callback(null);
-                }
-            });
+                        return callback(null);
+                    }
+                });
             }
             catch (error) {
                 return callback(new Error(error));

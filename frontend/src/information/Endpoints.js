@@ -5,6 +5,7 @@ var host = "http://localhost:8081"
 export var urls = {
     "LOGIN": host+"/users/login",
     "SIGNUP": host+"/users/signup",
+    "AUTHENTICATE": host+"users/authenticate",
     "USER_INFO": host+"/users/",
     "CREATE_ROOM":host+"/rooms/createRoom",
     "ROOM_INFO":host+"/rooms/",

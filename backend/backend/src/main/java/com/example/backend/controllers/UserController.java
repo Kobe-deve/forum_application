@@ -15,7 +15,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -110,5 +112,32 @@ public class UserController {
         }
         
         return "ERROR: Could not verify user";
+    }
+
+    // authenticate the user given the jwt token
+    @PostMapping("/authenticate")
+    public Map<String,Object> verifyToken(@RequestBody Map<String, String> payload)
+    {
+        Map<String,Object> returnedElements = new HashMap<String,Object>();
+
+        if(payload.get("Token") != null)
+        {
+            // check if the token isn't expired
+            boolean verified = JWT_Token.verifyJWT(payload.get("Token"));
+            returnedElements.put("status",verified);
+
+            if(verified)
+            {
+                String username = JWT_Token.getUsername(payload.get("Token"));
+                String room = JWT_Token.getRoom(payload.get("Token"));
+
+                returnedElements.put("token",JWT_Token.generateJWT(username,Long.parseLong(room)));
+                
+            }
+        }
+        else
+            returnedElements.put("status",false);
+        
+        return returnedElements;
     }
 }
