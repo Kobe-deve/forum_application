@@ -16,29 +16,21 @@ export async function callAuth(token, callback)
             })
             .then(async (responseData) => { // check if 
                 let postResponse = await responseData.json();
-
-                if(postResponse[0] === "ERROR: Could not login") // check if the user is correct
+                
+                if(postResponse["status"] && typeof postResponse["status"] == "boolean")
                 {
-                    return callback(new Error('Invalid username or password'));
-                }
-                else if(postResponse[0] === "ERROR: The account is not verified") // check if the user is verified
-                {
-                    return callback(new Error('Account is not verified'));
+                    return callback(null);
                 }
                 else
                 {
-                    userData["JWT"] = postResponse[0];
-                    userData["Username"] = postResponse[1];
-                    userData["LoggedIn"] = true;
-                    setUserData(postResponse[0],postResponse[1],"",-1,-1);
-
-                    return callback(null);
+                    
+                    return callback(new Error('Error verifying'));
                 }
             });
     }
     catch(error)
     {
-
+        return callback(new Error('Error verifying'));
     }
 }
 
@@ -64,7 +56,7 @@ export async function callLogin(username, password, callback)
                 .then(async (responseData) => { // if successfully logged in, establish user
                     let postResponse = await responseData.json();
 
-                    if(postResponse.length == 2)
+                    if(postResponse.length == 2 && postResponse[0].length > 0 && postResponse[1].length > 0)
                     {
                         userData["JWT"] = postResponse[0];
                         userData["Username"] = postResponse[1];
@@ -118,10 +110,11 @@ export async function callSignup(username, email, password, callback)
                     .then(async (responseData) => { 
                         let postResponse = await responseData.json();
                         
-                        if(postResponse[0] ==="ERROR: Username exists") // if username exists
-                            return callback(new Error('The username already exists'));
-                        else // if successfully signed up, flag successful user creation
+                        if(postResponse[0] ==="User created!") // if successfully signed up, flag successful user creation
                             return callback(null);
+                        else
+                            return callback(new Error('The username already exists'));
+                    
                     });
             }
             catch(error)

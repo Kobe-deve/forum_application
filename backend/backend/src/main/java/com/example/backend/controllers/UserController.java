@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/users")
@@ -60,6 +62,15 @@ public class UserController {
         return returnData;
     }
 
+    // checking email pattern
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validateEmail(String emailStr) {
+            Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+            return matcher.matches();
+    }
+
     @PostMapping("/signup")
     public ArrayList<String> createUser(@RequestBody User user) {
 
@@ -67,27 +78,41 @@ public class UserController {
 
         ArrayList<String> returnData = new ArrayList<String>();
 
-        if(usernames.size() == 0 && userService.createUser(user) != null)
+        if(user.username.length() > 0 && user.password.length() > 0 && validateEmail(user.email))
         {
-            String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
-            
-            // send verification link email
-            try{
-                // TODO add email service
-                // emailSender.sendEmail(user.email,"Verification Link",verificationLink);
-                
-                // temporarily removing unverified since SMTP isn't set up
-                user.status = activityStatus.OFFLINE;
+             if(usernames.size() == 0)
+             {
+                if(userService.createUser(user) != null)
+                {
+                    String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
+                    
+                    // send verification link email
+                    try{
+                        // TODO add email service
+                        // emailSender.sendEmail(user.email,"Verification Link",verificationLink);
+                        
+                        // temporarily removing unverified since SMTP isn't set up
+                        user.status = activityStatus.OFFLINE;
 
-                returnData.add("User created!");
+                        returnData.add("User created!");
+                    }
+                    catch(Error e) // catch if email could not send
+                    {
+                        returnData.add("ERROR: Could not send verification email");
+                    }
+                }
+                else
+                {
+                    returnData.add("ERROR: Could not create user");
+                }
             }
-            catch(Error e) // catch if email could not send
+            else
             {
-                returnData.add("ERROR: Could not send verification email");
+                returnData.add("ERROR: Username exists");
             }
         }
         else
-            returnData.add("ERROR: Username exists");
+            returnData.add("ERROR: Username/Password/Email invalid");
         
         return returnData;
     }

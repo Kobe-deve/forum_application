@@ -6,3 +6,11 @@ test('app renders', () => {
   const linkElement = screen.getByLabelText("front-page");
   expect(linkElement).toBeInTheDocument();
 });
+
+test('app renders when there is login data', () => {
+  localStorage.setItem("JWT","blank");
+  
+  render(<App />);
+  const linkElement = screen.getByLabelText("front-page");
+  expect(linkElement).toBeInTheDocument();
+});

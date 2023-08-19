@@ -19,8 +19,11 @@ test('redirects to front page when there is no user data', ()=>{
 
 test('renders home page', () => {
   userData["Username"] = "test"
+  localStorage.setItem("JWT","blank");
     render(
       <BrowserRouter><Home /></BrowserRouter>);
     const linkElement = screen.getByLabelText("home");
     expect(linkElement).toBeInTheDocument();
   });
+
+  
