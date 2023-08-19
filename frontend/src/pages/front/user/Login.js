@@ -41,13 +41,13 @@ export default function Login() {
   return(
     <form aria-label='login' name="loginForm" onSubmit={e => submitLogin(e)}>
         Login
-        <input type="text" onChange={e=> setUsername(e.target.value)} placeholder='Username'/>
-        <input type="password" onChange={e=> setPassword(e.target.value)} placeholder='Password'/>
-        <input type="submit" value="Login"/>
+        <input type="text" aria-label='username' onChange={e=> setUsername(e.target.value)} placeholder='Username'/>
+        <input type="password" aria-label='password' onChange={e=> setPassword(e.target.value)} placeholder='Password'/>
+        <input type="submit" aria-label='login-submit' value="Login"/>
 
-        {pendingLogin && <div>Logging in...</div>}
-        {successLogin && <div>Logged in</div>}
-        {loginError && <div>Could not log in: {responseError} </div>}
+        {pendingLogin && <div aria-label='loading'>Logging in...</div>}
+        {successLogin && <div aria-label='success'>Logged in</div>}
+        {loginError && <div aria-label='fail'>Could not log in: {responseError} </div>}
       </form>
     );
 }

@@ -1,7 +1,7 @@
 import { render, screen,waitFor } from '@testing-library/react';
 import { callLogin, callAuth, callSignup } from '../functions/user/LoginFunctions';
 
-const mockSuccessLogin = [
+export const mockSuccessLogin = [
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGlzaXNhbmV3dXNlcnRvdGVzdHdpdGgiLCJjdXJyZW50X3Jvb20iOiItMSIsImlhdCI6MTY5MjM5NTQ4OSwiZXhwIjoxNjkyMzk1ODQ5fQ.V5zV9PIN1mHfOd5cMNhz0v6saLSHXrsL-k9P7pVoJFA",
     "thisisanewusertotestwith"
 ];
