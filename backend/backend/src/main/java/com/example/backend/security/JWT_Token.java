@@ -50,6 +50,11 @@ public class JWT_Token {
         return Jwts.parser().setSigningKey(signature).parseClaimsJws(token).getBody().getSubject();
     }
 
+    // get the current room the user with the JWT is in
+    public String getRoom(String token) {
+        return Jwts.parser().setSigningKey(signature).parseClaimsJws(token).getBody().get("current_room").toString();
+    }
+
     // verify the JWT and make sure it hasn't expired
     public boolean verifyJWT(String token){
         try {
@@ -61,10 +66,5 @@ public class JWT_Token {
         } catch (ArrayIndexOutOfBoundsException | JwtException | IllegalArgumentException e) {
             return false;
         }
-    }
-
-    // get the current room the user with the JWT is in
-    public String getRoom(String token) {
-        return Jwts.parser().setSigningKey(signature).parseClaimsJws(token).getBody().get("current_room").toString();
     }
 }

@@ -14,6 +14,27 @@ export async function callAuth(token, callback)
                 },
                 body: JSON.stringify({"Token":token})            
             })
+            .then(async (responseData) => { // check if 
+                let postResponse = await responseData.json();
+
+                if(postResponse[0] === "ERROR: Could not login") // check if the user is correct
+                {
+                    return callback(new Error('Invalid username or password'));
+                }
+                else if(postResponse[0] === "ERROR: The account is not verified") // check if the user is verified
+                {
+                    return callback(new Error('Account is not verified'));
+                }
+                else
+                {
+                    userData["JWT"] = postResponse[0];
+                    userData["Username"] = postResponse[1];
+                    userData["LoggedIn"] = true;
+                    setUserData(postResponse[0],postResponse[1],"",-1,-1);
+
+                    return callback(null);
+                }
+            });
     }
     catch(error)
     {
@@ -43,7 +64,16 @@ export async function callLogin(username, password, callback)
                 .then(async (responseData) => { // if successfully logged in, establish user
                     let postResponse = await responseData.json();
 
-                    if(postResponse[0] === "ERROR: Could not login") // check if the user is correct
+                    if(postResponse.length == 2)
+                    {
+                        userData["JWT"] = postResponse[0];
+                        userData["Username"] = postResponse[1];
+                        userData["LoggedIn"] = true;
+                        setUserData(postResponse[0],postResponse[1],"",-1,-1);
+
+                        return callback(null);
+                    }
+                    else if(postResponse[0] === "ERROR: Could not login") // check if the user is correct
                     {
                         return callback(new Error('Invalid username or password'));
                     }
@@ -53,12 +83,7 @@ export async function callLogin(username, password, callback)
                     }
                     else
                     {
-                        userData["JWT"] = postResponse[0];
-                        userData["Username"] = postResponse[1];
-                        userData["LoggedIn"] = true;
-                        setUserData(postResponse[0],postResponse[1],"",-1,-1);
-
-                        return callback(null);
+                        return callback(new Error('There was a problem logging in'));
                     }
                 });
             }
