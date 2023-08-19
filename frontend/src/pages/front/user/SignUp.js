@@ -43,15 +43,15 @@ export default function SignUp(){
   return(
       <form aria-label='signup' name="signupForm" onSubmit={e=>submitSignup(e)}>
         Create Account
-        <input type="text" id='username' onChange={e=> setUsername(e.target.value)} placeholder='Username'/>
-        <input type="text" id='email' onChange={e=> setEmail(e.target.value)} placeholder='Email'/>
-        <input type="password" id='password' onChange={e=> setPassword(e.target.value)} placeholder='Password'/>
-        <input type="password" id='password-confirm' onChange={e=> setRepeatPassword(e.target.value)} placeholder='Confirm Password'/>
-        <input type="submit" value="Login"/>
+        <input type="text" aria-label='username'  id='username' onChange={e=> setUsername(e.target.value)} placeholder='Username'/>
+        <input type="text"  aria-label='email' id='email' onChange={e=> setEmail(e.target.value)} placeholder='Email'/>
+        <input type="password" id='password' aria-label='password' onChange={e=> setPassword(e.target.value)} placeholder='Password'/>
+        <input type="password" id='password-confirm' aria-label='password-confirm' onChange={e=> setRepeatPassword(e.target.value)} placeholder='Confirm Password'/>
+        <input type="submit" aria-label='signup-submit' value="Login"/>
 
-        {pendingSignup && <div>Creating account...</div>}
-        {successSignup && <div>Account created, check your email for the verification link</div>}
-        {signupError && <div>{responseError} </div>}
+        {pendingSignup && <div aria-label='loading'>Creating account...</div>}
+        {successSignup && <div aria-label='success'>Account created, check your email for the verification link</div>}
+        {signupError && <div aria-label='fail'>{responseError} </div>}
       </form>
     );
 }
