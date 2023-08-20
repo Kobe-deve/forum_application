@@ -1,6 +1,11 @@
 import { render, screen,waitFor } from '@testing-library/react';
 import { callLogin, callAuth, callSignup } from '../functions/user/LoginFunctions';
 
+Object.defineProperty(window.document, 'cookie', {
+  writable: true,
+  value: 't=THEREISATOKENMAN;',
+});
+
 export const mockSuccessLogin = [
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGlzaXNhbmV3dXNlcnRvdGVzdHdpdGgiLCJjdXJyZW50X3Jvb20iOiItMSIsImlhdCI6MTY5MjM5NTQ4OSwiZXhwIjoxNjkyMzk1ODQ5fQ.V5zV9PIN1mHfOd5cMNhz0v6saLSHXrsL-k9P7pVoJFA",
     "thisisanewusertotestwith"
@@ -54,6 +59,8 @@ const mockSignupEmailFail= [
 afterEach(() => {
   jest.restoreAllMocks();
 });
+
+// login
 
 test('test login endpoint call',async ()=>{
     jest.spyOn(global, 'fetch').mockResolvedValue({
@@ -179,11 +186,13 @@ test('test error from endpoint',async ()=>{
 
 });
 
+// authentication
+
 test('test verifying a verified jwt',async ()=>{
   jest.spyOn(global, 'fetch').mockResolvedValue({
     json: jest.fn().mockResolvedValue(mockAuthSuccess)
   })
-
+  
   var result = "";
   
   await waitFor(() => {
@@ -261,6 +270,31 @@ test('test error from authentication endpoint',async ()=>{
     },{timeout:3000}
   );
 });
+
+test('will not authenticate an empty token',async ()=>{
+
+  Object.defineProperty(window.document, 'cookie', {
+    writable: true,
+    value: '',
+  });
+
+  var result = "";
+  
+  await waitFor(() => {
+      const authCall = callAuth("testtoken",error=>{
+          
+          if(!error)
+              result = "PASS";
+          else
+              result = error.message;
+      });
+      expect(result).toEqual("Error: No way to authenticate");
+    },{timeout:3000}
+  );
+});
+
+
+// signup
 
 test('test complete signup',async ()=>{
   jest.spyOn(global, 'fetch').mockResolvedValue({

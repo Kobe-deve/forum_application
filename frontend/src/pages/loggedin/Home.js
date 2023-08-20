@@ -1,6 +1,6 @@
-import { userData } from '../../information/UserData';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import { getCookie } from '../../information/UserData';
 
 export default function Home()
 {
@@ -8,14 +8,14 @@ export default function Home()
 
   // checks if the user is logged in and redirects them to the front page if they aren't
   useEffect(()=>{
-    if(userData["Username"] === "")
+    if(getCookie('user') === "")
       navigate("/");
   })
 
   return (
       <div aria-label='home'>
         <h1>Home</h1>
-        <div>Welcome {userData["Username"]}</div>
+        <div>Welcome {getCookie('user')}</div>
       </div>
     );
 }

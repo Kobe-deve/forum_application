@@ -1,36 +1,48 @@
 import * as AuthenticationInfo from '../../information/Authentication'
 import * as EndpointInfo from '../../information/Endpoints'
-import { userData, setUserData } from '../../information/UserData';
+import { setUserData } from '../../information/UserData';
+import { getCookie } from '../../information/UserData';
 
 // verifying jwt token
 export async function callAuth(token, callback)
-{
-    try{
-        fetch(EndpointInfo.urls["AUTHENTICATE"], {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({"Token":token})            
-            })
-            .then(async (responseData) => { // check if 
-                let postResponse = await responseData.json();
-                
-                if(postResponse["status"] && typeof postResponse["status"] == "boolean")
-                {
-                    return callback(null);
-                }
-                else
-                {
-                    
-                    return callback(new Error('Error verifying'));
-                }
-            });
-    }
-    catch(error)
+{    
+    if(getCookie('t') !== "")
     {
-        return callback(new Error('Error verifying'));
+        try{
+            fetch(EndpointInfo.urls["AUTHENTICATE"], {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    },
+                    body: JSON.stringify({"Token":token})            
+                })
+                .then(async (responseData) => { // check if 
+                    let postResponse = await responseData.json();
+                    
+                    if(postResponse["status"] && typeof postResponse["status"] == "boolean")
+                    {
+                        const now = new Date();
+                        const expiration = now.getTime()+1800000;
+                        document.cookie = "t=" + postResponse["token"] +"expires="+ expiration.toString() +";secure;"
+                        
+                        return callback(null);
+                    }
+                    else
+                    {
+                        
+                        return callback(new Error('Error verifying'));
+                    }
+                });
+        }
+        catch(error)
+        {
+            return callback(new Error('Error verifying'));
+        }
+    }
+    else
+    {
+        return callback(new Error('Error: No way to authenticate'));
     }
 }
 
@@ -58,9 +70,6 @@ export async function callLogin(username, password, callback)
 
                     if(postResponse.length == 2 && postResponse[0].length > 0 && postResponse[1].length > 0)
                     {
-                        userData["JWT"] = postResponse[0];
-                        userData["Username"] = postResponse[1];
-                        userData["LoggedIn"] = true;
                         setUserData(postResponse[0],postResponse[1],"",-1,-1);
 
                         return callback(null);

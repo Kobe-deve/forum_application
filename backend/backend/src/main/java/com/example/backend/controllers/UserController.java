@@ -45,14 +45,17 @@ public class UserController {
         ArrayList<String> returnData = new ArrayList<String>();
 
         // check if username exists or is a verified account
-        if(usernames.size() == 1 && user.password.equals(usernames.get(0).password) && usernames.get(0).status != activityStatus.UNVERIFIED)
+        if(usernames.size() == 1)
         {
-            returnData.add(JWT_Token.generateJWT(user.username,null).toString());
-            returnData.add(user.username);
-        }
-        else if(usernames.get(0).status == activityStatus.UNVERIFIED)
-        {
-            returnData.add("ERROR: The account is not verified");
+            if(user.password.equals(usernames.get(0).password) && usernames.get(0).status != activityStatus.UNVERIFIED)
+            {
+                returnData.add(JWT_Token.generateJWT(user.username,null).toString());
+                returnData.add(user.username); 
+            }
+            else if(usernames.get(0).status == activityStatus.UNVERIFIED)
+            {
+                returnData.add("ERROR: The account is not verified");
+            }
         }
         else
         {

@@ -2,4 +2,6 @@ test('Token is cleared if it is invalid',()=>{
 
 });
 
-test('',()=>{});
+test('Token is renewed if it is valid',()=>{
+    
+});

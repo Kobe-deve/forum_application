@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter} from "react-router-dom";
 import Home from '../pages/loggedin/Home';
-import { userData } from '../information/UserData';
 import * as router from 'react-router'
 
 const navigate = jest.fn()
@@ -11,6 +10,11 @@ beforeEach(() => {
 })
 
 test('redirects to front page when there is no user data', ()=>{
+  Object.defineProperty(window.document, 'cookie', {
+    writable: true,
+    value: '',
+  });
+
   render(
     <BrowserRouter><Home /></BrowserRouter>);
     
@@ -18,8 +22,12 @@ test('redirects to front page when there is no user data', ()=>{
 });
 
 test('renders home page', () => {
-  userData["Username"] = "test"
-  localStorage.setItem("JWT","blank");
+
+  Object.defineProperty(window.document, 'cookie', {
+    writable: true,
+    value: 't=THEREISATOKENMAN;user=THEREISAUSER;',
+  });
+
     render(
       <BrowserRouter><Home /></BrowserRouter>);
     const linkElement = screen.getByLabelText("home");

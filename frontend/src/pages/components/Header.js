@@ -1,10 +1,12 @@
+import { getCookie } from "../../information/UserData";
+
 export default function Header() {
     return(<div>
-        {!localStorage.getItem("JWT") && (<>
+        {!getCookie("t") && (<>
         <a href="/login">Login</a>
         <a href="/signup">SignUp</a></>)}
 
-        {localStorage.getItem("JWT") && (<>
+        {getCookie("t") && (<>
         <a href="/logout">Logout</a></>)}
     </div>);
 }
