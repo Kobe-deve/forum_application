@@ -11,7 +11,7 @@ export function setUserData(JWT,Username,ChatroomName,ChatRoomId){
 // verify that the jwt token is valid, if not then remove credentials
 export function verifyCredentials()
 {
-    if(getCookie("t") != "")
+    if(getCookie("t") !== "")
     {
         try{
             callAuth(getCookie("t"),error=>{
@@ -38,7 +38,7 @@ export function getCookie(cname) {
     let ca = decodedCookie.split(';');
     for(let i = 0; i <ca.length; i++) {
       let c = ca[i];
-      if (c.indexOf(name) == 0) {
+      if (c.indexOf(name) === 0) {
         return c.substring(name.length, c.length);
       }
     }

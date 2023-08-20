@@ -68,7 +68,7 @@ export async function callLogin(username, password, callback)
                 .then(async (responseData) => { // if successfully logged in, establish user
                     let postResponse = await responseData.json();
 
-                    if(postResponse.length == 2 && postResponse[0].length > 0 && postResponse[1].length > 0)
+                    if(postResponse.length === 2 && postResponse[0].length > 0 && postResponse[1].length > 0)
                     {
                         setUserData(postResponse[0],postResponse[1],"",-1,-1);
 

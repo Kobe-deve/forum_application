@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import {useState } from 'react';
 import {callSignup} from '../../../functions/user/LoginFunctions';
 
 export default function SignUp(){
