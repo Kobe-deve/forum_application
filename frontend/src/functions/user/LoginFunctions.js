@@ -24,7 +24,7 @@ export async function callAuth(token, callback)
                     {
                         const now = new Date();
                         const expiration = now.getTime()+1800000;
-                        document.cookie = "t=" + postResponse["token"] +"expires="+ expiration.toString() +";secure;"
+                        document.cookie = "t=" + postResponse["token"] +";expires="+ expiration.toString() +";secure;"
                         
                         return callback(null);
                     }

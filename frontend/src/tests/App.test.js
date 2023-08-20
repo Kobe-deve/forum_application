@@ -8,7 +8,10 @@ test('app renders', () => {
 });
 
 test('app renders when there is login data', () => {
-  localStorage.setItem("JWT","blank");
+  Object.defineProperty(window.document, 'cookie', {
+    writable: true,
+    value: 't=THEREISATOKENMAN;user=THEREISAUSER;',
+  });
   
   render(<App />);
   const linkElement = screen.getByLabelText("front-page");
