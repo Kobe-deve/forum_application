@@ -54,7 +54,7 @@ jobs:
       - name: Write application.properties
         run: |
           dir
-          cd src/main/resources
+          cd ./src/main/resources
           echo $APP_PROP > application.properties
           cat  application.properties
           cd ..
