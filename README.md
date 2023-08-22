@@ -10,6 +10,14 @@
 	-accept friend requests
 	-message users they are friends with
 
+### Local Development Environment Variables
+	DATABASE_HOST - Database hostname
+	DATABASE_NAME - Name of the database to be operated on 
+	DATABASE_PASSWORD - password for database access
+	DATABASE_PORT - port number for accessing the database
+	DATABASE_USERNAME - username for database access
+	JWT_SIG - secret key for jwt 
+	
 ### Local Hosting port setup
 	Frontend: 3000 (modify 'start' command in forum_application\frontend\package.json)
 	Backend: 8081 (forum_application\backend\backend\src\main\resources\application.properties)
