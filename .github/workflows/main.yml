@@ -52,7 +52,8 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
       - name: Write application.properties
-        run: echo $APP_PROP >> /src/main/resources/application.properties
+        run: 'echo $APP_PROP >> /src/main/resources/application.properties'
+        shell: bash
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: run test
