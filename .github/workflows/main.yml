@@ -38,7 +38,7 @@ jobs:
     defaults:
       run:
         working-directory: ./backend/backend
-        
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 19
@@ -50,6 +50,11 @@ jobs:
         uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
       - name: Build with Gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
+      - name: Write dev.json
+        run: |
+          touch src/main/resources/application.properties
+          echo $APP_PROP >> src/main/resources/application.properties
+          cat  src/main/resources/application.properties
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: run test
