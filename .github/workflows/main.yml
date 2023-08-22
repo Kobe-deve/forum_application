@@ -56,6 +56,7 @@ jobs:
           dir
           cd src
           cd main
+          dir
           cd resources
           echo $APP_PROP > application.properties
           cat  application.properties
