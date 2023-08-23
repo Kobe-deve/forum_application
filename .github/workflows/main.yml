@@ -49,7 +49,7 @@ jobs:
       POSTGRES_DB: forum
       POSTGRES_PORT: 5432
       POSTGRES_HOST: localhost
-      
+
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_NAME: forum
@@ -67,19 +67,6 @@ jobs:
         uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
       - name: Build with Gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-      - name: Write application.properties
-        run: |
-          dir
-          cd src
-          cd main
-          dir
-          cd resources
-          echo $APP_PROP > application.properties
-          cat  application.properties
-          cd ..
-          cd ..
-          cd ..
-          dir
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: run test
