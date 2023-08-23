@@ -31,6 +31,12 @@ public class User {
     // whether a user is online/offline 
     public activityStatus status;
 
+    public User(String usern, String pass, String mail) {
+        this.username = usern;
+        this.password = pass;
+        this.email = mail;
+    }
+
     public Long getID()
     {
         return id;
