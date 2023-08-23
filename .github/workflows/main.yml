@@ -48,7 +48,7 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_NAME: forum
       DATABASE_PORT: 5432
-      DATABASE_HOST: localhost
+      DATABASE_HOST: postgres 
       APP_PROP : ${{ secrets.APP_PROP }}
     steps:
       - uses: actions/checkout@v3
@@ -63,7 +63,6 @@ jobs:
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
       - name: Write application.properties
         run: |
-          sudo netstat -plunt |grep postgres
           dir
           cd src
           cd main
