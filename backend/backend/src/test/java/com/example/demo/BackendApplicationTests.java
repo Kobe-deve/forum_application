@@ -2,7 +2,7 @@ package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 
-class backendapplicationtests {
+class BackendApplicationTests {
 	@Test
 	void contextLoads() {
 	}
