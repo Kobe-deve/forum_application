@@ -44,11 +44,17 @@ jobs:
       run:
         working-directory: ./backend/backend
     env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: forum
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: localhost
+      
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_NAME: forum
       DATABASE_PORT: 5432
-      DATABASE_HOST: postgres 
+      DATABASE_HOST: localhost 
       APP_PROP : ${{ secrets.APP_PROP }}
     steps:
       - uses: actions/checkout@v3
