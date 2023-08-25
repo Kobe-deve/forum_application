@@ -24,11 +24,11 @@ import java.util.regex.Pattern;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private MailService emailSender;
+//    @Autowired
+//    private MailService emailSender;
 
     @Autowired
-    private UserService userService;
+    private UserService UserService;
 
     @Autowired
     private UserRepository UserRepository;
@@ -85,7 +85,7 @@ public class UserController {
         {
              if(usernames.size() == 0)
              {
-                if(userService.createUser(user) != null)
+                if(UserService.createUser(user) != null)
                 {
                     String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
                     
@@ -124,14 +124,14 @@ public class UserController {
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "{$UserController.getUserById}", response = User.class, authorizations = {@Authorization(value="apiKey")})
     public User getUserById(@PathVariable("id") Long id) {
-        return userService.getUserById(id);
+        return UserService.getUserById(id);
     }
 
     // verify a user so they can access their account
     @GetMapping("/verify/{user_id}")
     public String verifyUser(@PathVariable("user_id") Long id)
     {
-        User verifyUser = userService.getUserById(id);
+        User verifyUser = UserService.getUserById(id);
 
         if(verifyUser != null && verifyUser.status == activityStatus.UNVERIFIED)
         {
