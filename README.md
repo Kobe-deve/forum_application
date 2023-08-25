@@ -37,6 +37,9 @@
 		Test
 			gradlew test 
 
+### Database Schema
+![Schema](./database_scehma.PNG)
+
 ### Stack/Technologies:
 
 	-(Desktop) Frontend:
@@ -45,8 +48,10 @@
 		Spring Boot/Java
 	-Database:
 		PostgreSQL
-	
-	
+
+### Tools
+- https://dbdiagram.io/home (Helpful for database scehma visualization)	
+
 ### Resources (for ideas/info on implementation):
 - https://studygyaan.com/spring-boot/how-to-connect-postgresql-database-in-spring-boot-project
 - https://www.amarjanica.com/externalize-sql-statements-in-java
