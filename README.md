@@ -37,6 +37,9 @@
 		Test
 			gradlew test 
 
+### Architecture (Initial/Simplified)
+![Architecture](architecture.png)
+
 ### Database Schema
 ![Schema](database_schema.PNG)
 
