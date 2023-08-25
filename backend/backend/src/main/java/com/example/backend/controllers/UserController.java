@@ -2,12 +2,12 @@ package com.example.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+//import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.backend.models.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.security.JWT_Token;
-import com.example.backend.service.MailService;
+//import com.example.backend.service.MailService;
 import com.example.backend.service.UserService;
 import com.example.enums.activityStatus;
 
@@ -87,7 +87,7 @@ public class UserController {
              {
                 if(UserService.createUser(user) != null)
                 {
-                    String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
+                    //String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
                     
                     // send verification link email
                     try{
