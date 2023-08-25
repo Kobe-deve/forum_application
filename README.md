@@ -38,7 +38,7 @@
 			gradlew test 
 
 ### Database Schema
-![Schema](./database_scehma.PNG)
+![Schema](database_schema.PNG)
 
 ### Stack/Technologies:
 
