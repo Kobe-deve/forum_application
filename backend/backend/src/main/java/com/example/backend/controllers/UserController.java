@@ -83,8 +83,8 @@ public class UserController {
 
         if(user.username.length() > 0 && user.password.length() > 0 && validateEmail(user.email))
         {
-             if(usernames.size() == 0)
-             {
+            if(usernames.size() == 0)
+            {
                 if(UserService.createUser(user) != null)
                 {
                     //String verificationLink = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/verify/"+user.getID().toString();
@@ -115,8 +115,11 @@ public class UserController {
             }
         }
         else
+        {
+            System.out.println("ERROR ERROR");
             returnData.add("ERROR: Username/Password/Email invalid");
-        
+        }
+
         return returnData;
     }
 

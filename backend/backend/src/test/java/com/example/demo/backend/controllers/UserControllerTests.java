@@ -14,7 +14,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import static org.hamcrest.CoreMatchers.*;
 
 import com.example.backend.BackendApplication;
 import com.example.backend.controllers.UserController;
@@ -76,5 +79,20 @@ public class UserControllerTests {
         .accept(MediaType.APPLICATION_JSON)
         )
         .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    void cannotCreateUserWithInvalidEmail() throws Exception{
+        User signupUserTest = new User("Username","Password","NotCorrect");
+        
+        // signup 
+        ObjectMapper objectMapper = new ObjectMapper();
+
+            this.mockMvc.perform(MockMvcRequestBuilders.post("/users/signup")
+        .content(objectMapper.writeValueAsString(signupUserTest))
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        )
+        .andDo(print()).andExpect(content().string(containsString("[]")));
     }
 }

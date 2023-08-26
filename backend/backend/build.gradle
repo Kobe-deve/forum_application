@@ -34,7 +34,8 @@ dependencies {
 	implementation "javax.xml.bind:jaxb-api:2.2.11"
 	
 	testImplementation "org.springframework.security:spring-security-config"
-	
+	testImplementation 'org.hamcrest:hamcrest:2.2'
+	testImplementation 'org.hamcrest:hamcrest-library:2.2'
     runtimeOnly 'org.postgresql:postgresql:42.2.10'
 	testImplementation "org.springframework.boot:spring-boot-starter-security"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
