@@ -39,8 +39,6 @@ public class JWT_Token {
         // set time information
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
-
-        System.out.println(validity.toString());
         
         return Jwts.builder().setClaims(claims).setIssuedAt(now).setExpiration(validity).signWith(SignatureAlgorithm.HS256, signature).compact();
     }

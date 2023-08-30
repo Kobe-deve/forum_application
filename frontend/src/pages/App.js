@@ -6,6 +6,7 @@ import SignUp from "../pages/front/user/SignUp.js"
 import Home from '../pages/loggedin/Home.js'
 import NoPage from "../pages/NoPage.js"
 import Header from "./components/Header.js";
+import '../index.css'
 
 export default function App(){
 

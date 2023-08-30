@@ -116,7 +116,6 @@ public class UserController {
         }
         else
         {
-            System.out.println("ERROR ERROR");
             returnData.add("ERROR: Username/Password/Email invalid");
         }
 
