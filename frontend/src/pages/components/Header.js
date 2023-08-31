@@ -5,12 +5,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/logo.png';
 import { clearData } from "../../information/UserData";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
+
     return(<div>
         <Navbar className="bg-body-tertiary" data-bs-theme="dark">
             
-                <Navbar.Brand href="/">
+                <Navbar.Brand onClick={()=>{navigate("/")}}>
                     <img
                         src={logo}
                         width="60"
@@ -24,7 +27,7 @@ export default function Header() {
                     {!getCookie("user") && (<></>)}
 
                     {getCookie("user") && (<>
-                    <Nav.Link href="/" onClick={()=>{clearData()}}>Logout</Nav.Link></>)}
+                    <Nav.Link bg="light" onClick={()=>{clearData(); navigate("/");}}>Logout</Nav.Link></>)}
                 </Nav>
         </Navbar>
     </div>);
