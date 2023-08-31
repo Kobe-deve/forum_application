@@ -5,7 +5,17 @@ export function setUserData(JWT,Username,ChatroomName,ChatRoomId){
 
     const now = new Date();
     const expiration = now.getTime()+1800000;
-    document.cookie = "cri="+ChatRoomId.toString+";cr="+ ChatroomName +";user="+Username + ";t=" +JWT +";expires="+ expiration.toString() +";secure;"
+    document.cookie = "user="+Username + ";t="+ JWT +";expires="+ expiration.toString() +";secure;"
+}
+
+// clear all user data
+export function clearData()
+{
+    var allCookies = document.cookie.split(';');
+                
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
 }
 
 // verify that the jwt token is valid, if not then remove credentials

@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card'
 
 export default function Login() {
 
@@ -71,9 +72,9 @@ export default function Login() {
                     </Col>
                   </Row>
 
-                  {pendingLogin && <div aria-label='loading'>Logging in...</div>}
-                  {successLogin && <div aria-label='success'>Logged in</div>}
-                  {loginError && <div aria-label='fail'>Could not log in: {responseError} </div>}
+                  {pendingLogin && <Card bg='info'><div aria-label='loading'>Logging in...</div></Card>}
+                  {successLogin && <Card bg='success'><div aria-label='success'>Logged in</div></Card>}
+                  {loginError && <Card bg='danger'><div aria-label='fail'>Could not log in: {responseError} </div></Card>}
                 </Container>
               </Form>
           </Col>

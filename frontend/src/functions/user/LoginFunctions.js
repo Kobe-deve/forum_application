@@ -70,7 +70,7 @@ export async function callLogin(username, password, callback)
 
                     if(postResponse.length === 2 && postResponse[0].length > 0 && postResponse[1].length > 0)
                     {
-                        setUserData(postResponse[0],postResponse[1],"",-1,-1);
+                        setUserData(postResponse[0],postResponse[1],"",-1);
 
                         return callback(null);
                     }

@@ -4,6 +4,7 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/logo.png';
+import { clearData } from "../../information/UserData";
 
 export default function Header() {
     return(<div>
@@ -20,10 +21,10 @@ export default function Header() {
                     ZanRooms
                 </Navbar.Brand>
                 <Nav className="me-auto">
-                    {!getCookie("t") && (<></>)}
+                    {!getCookie("user") && (<></>)}
 
-                    {getCookie("t") && (<>
-                    <Nav.Link href="/logout">Logout</Nav.Link></>)}
+                    {getCookie("user") && (<>
+                    <Nav.Link href="/" onClick={()=>{clearData()}}>Logout</Nav.Link></>)}
                 </Nav>
         </Navbar>
     </div>);
