@@ -1,1 +1,10 @@
 html {background-color: rgb(105, 80, 206)}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide scrollbars */
+}
+* {
+    box-sizing: border-box;
+}

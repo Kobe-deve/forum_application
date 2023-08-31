@@ -1,6 +1,11 @@
 import { useEffect,useState } from 'react';
 import {callLogin} from '../../../functions/user/LoginFunctions';
 import { useNavigate } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 export default function Login() {
 
@@ -39,15 +44,38 @@ export default function Login() {
   }
 
   return(
-    <form aria-label='login' name="loginForm" onSubmit={e => submitLogin(e)}>
-        Login
-        <input type="text" aria-label='username' onChange={e=> setUsername(e.target.value)} placeholder='Username'/>
-        <input type="password" aria-label='password' onChange={e=> setPassword(e.target.value)} placeholder='Password'/>
-        <input type="submit" aria-label='login-submit' value="Login"/>
+      <Col>
+              <Form className="text-center" aria-label='login' name="loginForm" onSubmit={e => submitLogin(e)}>
+                <Container>
+                  <Row>
+                    <Col>
+                      <h1>Login</h1>
+                    </Col>
+                  </Row>
+                  
+                  <Row className="mx-auto">
+                    <Col>
+                      <input type="text" aria-label='username' onChange={e=> setUsername(e.target.value)} placeholder='Username'/>
+                    </Col>
+                  </Row>
+                  
+                  <Row >
+                    <Col>
+                       <input type="password" aria-label='password' onChange={e=> setPassword(e.target.value)} placeholder='Password'/>
+                    </Col>
+                  </Row>
 
-        {pendingLogin && <div aria-label='loading'>Logging in...</div>}
-        {successLogin && <div aria-label='success'>Logged in</div>}
-        {loginError && <div aria-label='fail'>Could not log in: {responseError} </div>}
-      </form>
+                  <Row>
+                    <Col>
+                      <Button type="submit" aria-label='login-submit'>Login </Button>
+                    </Col>
+                  </Row>
+
+                  {pendingLogin && <div aria-label='loading'>Logging in...</div>}
+                  {successLogin && <div aria-label='success'>Logged in</div>}
+                  {loginError && <div aria-label='fail'>Could not log in: {responseError} </div>}
+                </Container>
+              </Form>
+          </Col>
     );
 }

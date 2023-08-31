@@ -20,9 +20,7 @@ export default function Header() {
                     ZanRooms
                 </Navbar.Brand>
                 <Nav className="me-auto">
-                    {!getCookie("t") && (<>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/signup">SignUp</Nav.Link></>)}
+                    {!getCookie("t") && (<></>)}
 
                     {getCookie("t") && (<>
                     <Nav.Link href="/logout">Logout</Nav.Link></>)}
