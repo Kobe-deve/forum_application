@@ -7,14 +7,23 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "messageLog")
 public class Message {
+    public Message(){
+
+    }
+
     public Message(String string) {
         this.text = string;
     }
     
     // get the user who sent the message 
-    public void setUsernameString(String username)
+    public void setUsername(String username)
     {
         this.senderName = username;
+    }
+
+    public String getUsername()
+    {
+        return this.senderName;
     }
 
     // time information of when the message was sent 
@@ -31,7 +40,7 @@ public class Message {
     public String text;
     
     // username of the sender
-    public String senderName;
+    private String senderName;
 
     // id of the user who sent the message 
     public Long user_id;
