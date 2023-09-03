@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card'
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function SignUp(){
     
@@ -84,7 +85,7 @@ export default function SignUp(){
             </Col>
           </Row>
           
-        {pendingSignup && <Card bg='info'><div aria-label='loading'>Creating account...</div></Card>}
+        {pendingSignup && <Card bg='info'><div aria-label='loading'>Creating account...<Spinner aria-label = "logging-in-spinner" animation="border" variant="light" /></div></Card>}
         {successSignup && <Card bg='success'><div aria-label='success'>Account created, check your email for the verification link</div></Card>}
         {signupError && <Card bg='danger'><div aria-label='fail'>{responseError} </div></Card>}
         </Container>

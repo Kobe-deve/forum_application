@@ -7,6 +7,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
+import MessageRoom from "./loggedin/messaging/MessageRoom.js";
 
 export default function Content(){
     const [loading, setLoading] = useState(true);
@@ -34,6 +35,7 @@ export default function Content(){
                 <Routes>
                     <Route index element={<FrontPage />} />
                     <Route path="home" element={<Home />} />
+                    <Route path="messages" element={<MessageRoom />} />
                     <Route path="*" element={<NoPage />} />
                 </Routes>
             </>

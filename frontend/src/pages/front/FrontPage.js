@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import logo from '../../img/logo.png';
 import Login from './user/Login';
@@ -15,30 +14,27 @@ export default function FrontPage(){
     return(
       <div className="d-flex align-items-center justify-content-center text-center min-vh-100" aria-label='front-page'>
         <Container fluid>
-          <Row className="me-auto">
-              <Col>
+          <Col className="me-auto">
+              <Col className="d-flex">
               <img
                   src={logo}
-                  width="100%"
-                  height="100%"
+                  width="30%"
+                  height="30%"
                   className="d-inline-block align-top"
                   alt="ZanRooms Logo"
               />
-              
-            </Col>
-            <Col className="d-flex align-items-center">
               <h1>ZanRooms</h1>
-            </Col>
+              </Col>
             
             {action === "" && (<>
-              <Col className="d-flex align-items-center">
-                <Col><Button aria-label = "loginButton" onClick={() => setAction("login")}>Login</Button></Col>
-                <Col><Button aria-label = "signupButton"onClick={() => setAction("signup")}>Signup</Button></Col>  
+              <Col className="d-flex gap-2 justify-content-center">
+                <Button aria-label = "loginButton" onClick={() => setAction("login")}>Login</Button>
+                <Button aria-label = "signupButton"onClick={() => setAction("signup")}>Signup</Button>
               </Col>
             </>)}
             {action === "login" && (
                       
-                      <Col>
+                      <Col className="d-flex justify-content-center">
                         <Card>
                             <CloseButton aria-label = "closeLogin" style={{disply:'flex', justifyContent:'left'}} onClick={() => setAction("")} />
                           <Login/>
@@ -47,14 +43,14 @@ export default function FrontPage(){
                     )}
             {action === "signup" && (
                       
-                      <Col>
+                      <Col className="d-flex justify-content-center">
                         <Card>
                             <CloseButton aria-label = "closeSignup" style={{disply:'flex', justifyContent:'left'}} onClick={() => setAction("")} />
                           <SignUp/>
                         </Card>
                       </Col>
                     )}
-          </Row>
+          </Col>
         </Container>
       </div>);
 }
