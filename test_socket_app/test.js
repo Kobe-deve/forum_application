@@ -1,5 +1,4 @@
 const WebSocket = require('ws');
-
 var socket;
 
 socket = new WebSocket("ws://localhost:8081/sockettest");

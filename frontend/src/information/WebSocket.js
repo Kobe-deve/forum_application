@@ -1,25 +1,31 @@
-import { urls } from "./Endpoints";
-import Stomp from "webstomp-client";
-
 export function connect()
 {
-    var socket = new WebSocket(urls["MESSAGE_ROOM_SEND"]);
-    var stompClient = Stomp.over(socket);  
-    stompClient.connect({}, function(frame) {
-        console.log('Connected: ' + frame);
-        stompClient.subscribe(urls["MESSAGE_ROOM_LISTENING"], function(messageOutput) {
-            console.log(JSON.parse(messageOutput.body));
-        });
-    });
+    var socket = new WebSocket("ws://localhost:8081/sockettest", 'echo-protocol');
 
-    return stompClient;
+    socket.onerror = function(e) {
+        console.log("Could not connect");
+    }
+    
+    // Connection opened
+    socket.addEventListener("open", (event) => {
+      socket.send("{\"room_id\": 1}");
+      console.log("OPEN ");
+    });
+    
+    // Listen for messages
+    socket.addEventListener("message", (event) => {
+        let response = JSON.parse(event.data);
+        console.log(JSON.parse(response["messages"]));
+        socket.close();
+    });
+    
+
+    return socket;
 }
 
 export function disconnect(stompClient)
 {
-    if(stompClient != null) {
-        stompClient.disconnect();
-    }
+
 }
 
 export function showMessages(messageOutput)
