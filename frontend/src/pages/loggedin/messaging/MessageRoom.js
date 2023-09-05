@@ -39,7 +39,7 @@ export default function MessageRoom() {
           <Container fluid>
             <Card>
                 {
-                  connected && <div>{console.log(client.getMessages)}Connected</div>
+                  connected && <div>{console.log(messages)}Connected</div>
                 }
                 {
                   !connected && <Spinner aria-label = "loading-spinner" animation="border" variant="info" />
