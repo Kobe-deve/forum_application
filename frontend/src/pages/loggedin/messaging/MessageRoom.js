@@ -6,22 +6,43 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
-import {connect} from '../../../information/WebSocket.js';
+import Spinner from 'react-bootstrap/esm/Spinner.js';
+import {socketConnection} from '../../../information/WebSocket.js';
 
 export default function MessageRoom() {
     // socket client used 
-    const [client,setClient] = useState(null);
+    const [client,setClient] = useState(undefined);
+    const [messages, setMessages] = useState(undefined);
+    const [connected, setConnection] = useState(false);
 
+    // start web socket connection
     useEffect(()=>{
-      setClient(connect());
+      setClient(new socketConnection());
     },[]);
+
+    // wait for connection from backend and messages
+    useEffect(()=>{
+        if(client)
+        {
+          client.connect();
+          client.awaitConnection();
+          client.listen((messageReceived)=>
+          {
+            setMessages(messageReceived);
+            setConnection(true);
+          });
+        }
+    },[client]);
 
     return(
         <div className="d-flex align-items-center justify-content-center text-center min-vh-100" aria-label='message-room'>
           <Container fluid>
             <Card>
                 {
-                  client && <div>Connected</div>
+                  connected && <div>{console.log(client.getMessages)}Connected</div>
+                }
+                {
+                  !connected && <Spinner aria-label = "loading-spinner" animation="border" variant="info" />
                 }
                 <Form>
                   <Row className="d-flex align-items-end">

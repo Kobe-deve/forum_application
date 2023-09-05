@@ -1,39 +1,70 @@
-export function connect()
-{
-    var socket = new WebSocket("ws://localhost:8081/sockettest", 'echo-protocol');
+import { urls } from "./Endpoints";
 
-    socket.onerror = function(e) {
-        console.log("Could not connect");
+export class socketConnection 
+{
+    constructor() {
+        this.socket = null;
+        this.connected = false;
+        this.messages = {};
+        this.messageReceived = false;
     }
-    
-    // Connection opened
-    socket.addEventListener("open", (event) => {
-      socket.send("{\"room_id\": 1}");
-      console.log("OPEN ");
-    });
-    
-    // Listen for messages
-    socket.addEventListener("message", (event) => {
-        let response = JSON.parse(event.data);
-        console.log(JSON.parse(response["messages"]));
-        socket.close();
-    });
-    
 
-    return socket;
-}
+    setMessages = (jsonData) =>
+    {
+        this.messageReceived = true;
+        let response = JSON.parse(jsonData.data);
+        this.messages = JSON.parse(response["messages"]);
+    }
 
-export function disconnect(stompClient)
-{
+    get getMessages()
+    {
+        return this.messages;
+    }
 
-}
+    connect = () => {
+        this.socket = new WebSocket(urls["MESSAGE_ROOM"]);
+      
+        this.socket.onmessage = (event) => {
+            this.setMessages(event);
+        };
+    }
 
-export function showMessages(messageOutput)
-{
-    return (<div>{messageOutput.text}</div>)
-}
+    awaitConnection = (callbackFunction) => {
+        const recursion = this.awaitConnection;
+        setTimeout(
+            () => {
+                if(this.socket.readyState === 1)
+                {
+                    this.socket.send("{\"room_id\": 1}");
+                    this.connected = true;
+                    
+                    if(callbackFunction)
+                        callbackFunction(this.messages);
+                    return;
+                }
+                else
+                {
+                    recursion(callbackFunction);
+                }
+            },
+        1);
+    }
 
-export function sendMessage(message)
-{
-    
+    listen = (callbackFunction) => {
+        const recursion = this.listen;
+        setTimeout(
+            () => {
+                if(this.messageReceived)
+                {
+                    if(callbackFunction)
+                        callbackFunction(this.messages);
+                    return;
+                }
+                else
+                {
+                    recursion(callbackFunction);
+                }
+            },
+        1);
+    }
 }
