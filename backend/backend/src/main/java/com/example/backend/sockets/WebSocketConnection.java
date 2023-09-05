@@ -56,9 +56,9 @@ public class WebSocketConnection extends TextWebSocketHandler  {
                 i.setUsername(sender.username);
             }
 
-            specificMessage.addProperty(num + "message_sender", i.getUsername());
-            specificMessage.addProperty(num + "message_timeStamp", i.time_stamp.toString());
-            specificMessage.addProperty(num + "message_text", i.text.toString());
+            specificMessage.addProperty("message_sender", i.getUsername());
+            specificMessage.addProperty("message_timeStamp", i.time_stamp.toString());
+            specificMessage.addProperty("message_text", i.text.toString());
             
             messages.add(specificMessage);
             

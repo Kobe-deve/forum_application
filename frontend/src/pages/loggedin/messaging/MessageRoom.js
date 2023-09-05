@@ -34,12 +34,22 @@ export default function MessageRoom() {
         }
     },[client]);
 
+    const displayMessage = () => {
+        let displayMessages = []
+
+        messages.forEach(element => {
+          displayMessages.push(<div>{element.message_sender} - {element.message_text} - {element.message_timeStamp}</div>)
+        });
+
+        return (<div>{displayMessages}</div>);
+    }
+
     return(
         <div className="d-flex align-items-center justify-content-center text-center min-vh-100" aria-label='message-room'>
           <Container fluid>
             <Card>
                 {
-                  connected && <div>{console.log(messages)}Connected</div>
+                  connected && displayMessage()
                 }
                 {
                   !connected && <Spinner aria-label = "loading-spinner" animation="border" variant="info" />
