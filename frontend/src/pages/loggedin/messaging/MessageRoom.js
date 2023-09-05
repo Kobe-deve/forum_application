@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
-import Spinner from 'react-bootstrap/esm/Spinner.js';
+import Spinner from 'react-bootstrap/Spinner';
 import {socketConnection} from '../../../information/WebSocket.js';
 
 export default function MessageRoom() {
