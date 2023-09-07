@@ -1,6 +1,5 @@
 package com.example.backend.sockets;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +40,12 @@ public class WebSocketConnection extends TextWebSocketHandler  {
         JsonObject responseMessage = new JsonObject();
 
         ArrayList<JsonObject> messages = new ArrayList<JsonObject>();
-        int iterator = 0;
+
+        System.out.println("SENT MESSAGE:" + message.toString());
 
         for (Message i : MessageLogRepository.getMessages((long) accessedRoom)) 
         {
             JsonObject specificMessage = new JsonObject();
-
-            String num = Integer.toString(iterator);
             
             // if the sender is unknown, get it
             if(i.getUsername() == null)
@@ -61,8 +59,6 @@ public class WebSocketConnection extends TextWebSocketHandler  {
             specificMessage.addProperty("message_text", i.text.toString());
             
             messages.add(specificMessage);
-            
-            iterator++;
         }
 
         responseMessage.addProperty("messages", messages.toString());

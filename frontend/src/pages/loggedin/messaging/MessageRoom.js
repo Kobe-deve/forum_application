@@ -20,6 +20,15 @@ export default function MessageRoom() {
       setClient(new socketConnection());
     },[]);
 
+    const sendAndUpdate = () => {
+      client.sendMessage();
+      client.listen((messageReceived)=>
+      {
+          setMessages(messageReceived);
+          setConnection(true);
+      });
+    }
+
     // wait for connection from backend and messages
     useEffect(()=>{
         if(client)
@@ -30,15 +39,17 @@ export default function MessageRoom() {
           {
             setMessages(messageReceived);
             setConnection(true);
+            setInterval(sendAndUpdate,1000);
           });
         }
     },[client]);
 
     const displayMessage = () => {
         let displayMessages = []
+        let iterator = 0;
 
         messages.forEach(element => {
-          displayMessages.push(<div>{element.message_sender} - {element.message_text} - {element.message_timeStamp}</div>)
+          displayMessages.push(<div key={iterator++} >{element.message_sender} - {element.message_text} - {element.message_timeStamp}</div>)
         });
 
         return (<div>{displayMessages}</div>);

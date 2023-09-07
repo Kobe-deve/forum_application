@@ -29,13 +29,17 @@ export class socketConnection
         };
     }
 
+    sendMessage = () => {
+        this.socket.send("{\"room_id\": 1}");
+    }
+
     awaitConnection = (callbackFunction) => {
         const recursion = this.awaitConnection;
         setTimeout(
             () => {
                 if(this.socket.readyState === 1)
                 {
-                    this.socket.send("{\"room_id\": 1}");
+                    this.sendMessage();
                     this.connected = true;
                     
                     if(callbackFunction)
