@@ -20,17 +20,17 @@ export default function MessageRoom() {
       setClient(new socketConnection());
     },[]);
 
-    const sendAndUpdate = () => {
-      client.sendMessage();
-      client.listen((messageReceived)=>
-      {
-          setMessages(messageReceived);
-          setConnection(true);
-      });
-    }
-
     // wait for connection from backend and messages
     useEffect(()=>{
+      const sendAndUpdate = () => {
+        client.sendMessage();
+        client.listen((messageReceived)=>
+        {
+            setMessages(messageReceived);
+            setConnection(true);
+        });
+      }
+
         if(client)
         {
           client.connect();
