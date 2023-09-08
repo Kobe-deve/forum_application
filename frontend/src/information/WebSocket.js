@@ -37,6 +37,7 @@ export class socketConnection
         const recursion = this.awaitConnection;
         setTimeout(
             () => {
+                console.log(this.socket.readyState);
                 if(this.socket.readyState === 1)
                 {
                     this.sendMessage();

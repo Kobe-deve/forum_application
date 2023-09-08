@@ -31,17 +31,17 @@ export default function MessageRoom() {
         });
       }
 
-        if(client)
+      if(client)
+      {
+        client.connect();
+        client.awaitConnection();
+        client.listen((messageReceived)=>
         {
-          client.connect();
-          client.awaitConnection();
-          client.listen((messageReceived)=>
-          {
-            setMessages(messageReceived);
-            setConnection(true);
-            setInterval(sendAndUpdate,1000);
-          });
-        }
+          setMessages(messageReceived);
+          setConnection(true);
+          setInterval(sendAndUpdate,1000);
+        });
+      }
     },[client]);
 
     const displayMessage = () => {
