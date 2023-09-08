@@ -10,24 +10,18 @@ import { useNavigate } from "react-router-dom";
 export default function Header() {
     const navigate = useNavigate();
 
-    return(<div>
+    return(<div aria-label="header">
         <Navbar className="bg-body-tertiary" data-bs-theme="dark">
             
-                <Navbar.Brand onClick={()=>{navigate("/")}}>
-                    <img
-                        src={logo}
-                        width="60"
-                        height="30"
-                        className="d-inline-block align-top"
-                        alt="ZanRooms Logo"
-                    />
+                <Navbar.Brand aria-label = "logo" onClick={()=>{navigate("/")}}>
+                    <img src={logo} width="60" height="30" className="d-inline-block align-top" alt="ZanRooms Logo"/>
                     ZanRooms
                 </Navbar.Brand>
                 <Nav className="me-auto">
                     {!getCookie("user") && (<></>)}
 
                     {getCookie("user") && (<>
-                    <Nav.Link bg="light" onClick={()=>{clearData(); navigate("/");}}>Logout</Nav.Link></>)}
+                    <Nav.Link bg="light" onClick={()=>{clearData(); navigate("/");}} aria-label="logout-button">Logout</Nav.Link></>)}
                 </Nav>
         </Navbar>
     </div>);
