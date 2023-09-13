@@ -58,9 +58,12 @@ export default function MessageRoom() {
 
     const displayMessage = () => {
         let displayMessages = []
+        
         let iterator = 0;
 
         messages.forEach(element => {
+          element.message_timeStamp = new Date(element.message_timeStamp).toLocaleString();
+
           element.sender = element.message_sender === getCookie("user");
           displayMessages.push(<div key={iterator++}>
                                 <Row className={element.sender ? "flex-row-reverse": ""}  style={{paddingLeft:15, paddingRight:15, paddingBottom:5, paddingTop:5}}>                                   
