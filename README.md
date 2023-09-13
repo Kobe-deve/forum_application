@@ -60,3 +60,5 @@
 - https://www.amarjanica.com/externalize-sql-statements-in-java
 - https://medium.com/@xoor/jwt-authentication-service-44658409e12c
 - https://medium.com/@davidtranwd/login-flow-with-react-and-redux-9a7d07be270e
+- https://tsh.io/blog/how-to-scale-websocket/
+- https://haris-zujo.medium.com/spring-cloud-gateway-request-filtering-and-redirection-9e4b6d559d1a

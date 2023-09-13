@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import Spinner from 'react-bootstrap/Spinner';
 import {socketConnection} from '../../../information/WebSocket.js';
+import Message from '../../components/messaging/Message.js';
 
 export default function MessageRoom() {
     // socket client used 
@@ -22,6 +23,7 @@ export default function MessageRoom() {
 
     // wait for connection from backend and messages
     useEffect(()=>{
+      // keeps sending a connection to get information on the chatroom
       const sendAndUpdate = () => {
         client.sendMessage();
         client.listen((messageReceived)=>
@@ -49,10 +51,12 @@ export default function MessageRoom() {
         let iterator = 0;
 
         messages.forEach(element => {
-          displayMessages.push(<div key={iterator++} >{element.message_sender} - {element.message_text} - {element.message_timeStamp}</div>)
+          displayMessages.push(<Row style = {{padding: 10}}> 
+                                  <Message key={iterator++} {...element}/>
+                               </Row>)
         });
 
-        return (<div>{displayMessages}</div>);
+        return (<div style={{maxHeight: "70vh", overflowAnchor: "auto", flexDirection: "column-reverse", overflowX: "hidden"}} className="overflow-y-scroll">{displayMessages}</div>);
     }
 
     return(
