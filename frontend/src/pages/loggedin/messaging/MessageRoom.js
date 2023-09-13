@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -9,17 +9,27 @@ import FormControl from 'react-bootstrap/FormControl';
 import Spinner from 'react-bootstrap/Spinner';
 import {socketConnection} from '../../../information/WebSocket.js';
 import Message from '../../components/messaging/Message.js';
+import { getCookie } from '../../../information/UserData.js';
 
 export default function MessageRoom() {
     // socket client used 
     const [client,setClient] = useState(undefined);
     const [messages, setMessages] = useState(undefined);
     const [connected, setConnection] = useState(false);
+    const chatLog = useRef();
 
     // start web socket connection
     useEffect(()=>{
       setClient(new socketConnection());
+      // set scrollbar to bottom
+      scrollToBottom();
     },[]);
+
+    const scrollToBottom = () => {
+      if (chatLog.current) {
+        chatLog.current.scrollTop = chatLog.current.scrollHeight;
+      }
+    }
 
     // wait for connection from backend and messages
     useEffect(()=>{
@@ -51,17 +61,20 @@ export default function MessageRoom() {
         let iterator = 0;
 
         messages.forEach(element => {
-          displayMessages.push(<Row style = {{padding: 10}}> 
-                                  <Message key={iterator++} {...element}/>
-                               </Row>)
+          element.sender = element.message_sender === getCookie("user");
+          displayMessages.push(<div key={iterator++}>
+                                <Row className={element.sender ? "flex-row-reverse": ""}  style={{paddingLeft:15, paddingRight:15, paddingBottom:5, paddingTop:5}}>                                   
+                                    <Message {...element}/>   
+                                </Row>
+                              </div>)
         });
 
-        return (<div style={{maxHeight: "70vh", overflowAnchor: "auto", flexDirection: "column-reverse", overflowX: "hidden"}} className="overflow-y-scroll">{displayMessages}</div>);
+        return (<div ref={chatLog} style={{maxHeight: "70vh", overflowAnchor: "auto", flexDirection: "column-reverse", overflowX: "hidden"}} className="overflow-y-scroll">{displayMessages}</div>);
     }
 
     return(
-        <div className="d-flex align-items-center justify-content-center text-center min-vh-100" aria-label='message-room'>
-          <Container fluid>
+        <div style={{position: "relative", bottom: "10%", maxWidth: "100%"}} className="d-flex align-items-center justify-content-center text-center min-vh-100" aria-label='message-room'>
+          <Container fluid style={{top:"1000"}}>
             <Card>
                 {
                   connected && displayMessage()
@@ -69,7 +82,7 @@ export default function MessageRoom() {
                 {
                   !connected && <Spinner aria-label = "loading-spinner" animation="border" variant="info" />
                 }
-                <Form>
+                <Form style={{backgroundColor:"blue"}}>
                   <Row className="d-flex align-items-end">
                     <Col>
                       <FormControl type="text" className="w-100" aria-label='message' onChange={e=> {}} placeholder='Type your message here'/>
