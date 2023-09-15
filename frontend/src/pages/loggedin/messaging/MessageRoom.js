@@ -48,6 +48,8 @@ export default function MessageRoom() {
       {
         client.connect();
         client.awaitConnection();
+
+        // check if an initial connection was made
         client.listen((messageReceived)=>
         {
           setMessages(messageReceived);
@@ -63,16 +65,19 @@ export default function MessageRoom() {
         
         let iterator = 0;
 
-        messages.forEach(element => {
-          element.message_timeStamp = new Date(element.message_timeStamp).toLocaleString();
-
-          element.sender = element.message_sender === getCookie("user");
-          displayMessages.push(<div key={iterator++}>
-                                <Row className={element.sender ? "flex-row-reverse": ""}  style={{paddingLeft:15, paddingRight:15, paddingBottom:5, paddingTop:5}}>                                   
-                                    <Message {...element}/>   
-                                </Row>
-                              </div>)
-        });
+        if(Array.isArray(messages))
+        {
+            messages.forEach(element => {
+              element.message_timeStamp = new Date(element.message_timeStamp).toLocaleString();
+    
+              element.sender = element.message_sender === getCookie("user");
+              displayMessages.push(<div key={iterator++}>
+                                    <Row className={element.sender ? "flex-row-reverse": ""}  style={{paddingLeft:15, paddingRight:15, paddingBottom:5, paddingTop:5}}>                                   
+                                        <Message {...element}/>   
+                                    </Row>
+                                  </div>)
+          });
+        }
 
         return (<div ref={chatLog} style={{maxHeight: "70vh", overflowAnchor: "auto", flexDirection: "column-reverse", overflowX: "hidden"}} className="overflow-y-scroll">{displayMessages}</div>);
     }

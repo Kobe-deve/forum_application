@@ -5,7 +5,7 @@ export function setUserData(JWT,Username,ChatroomName,ChatRoomId){
 
     const now = new Date();
     const expiration = now.getTime()+1800000;
-    document.cookie = "user="+Username + ";t="+ JWT +";expires="+ expiration.toString() +";secure;"
+    document.cookie = 'user='+Username + ';t='+ JWT +';expires='+ expiration.toString() +';secure;'
 }
 
 // clear all user data
