@@ -1,4 +1,5 @@
 import { urls } from "./Endpoints";
+import { getCookie } from "./UserData";
 
 export class socketConnection 
 {
@@ -7,13 +8,22 @@ export class socketConnection
         this.connected = false;
         this.messages = {};
         this.messageReceived = false;
+        this.error = false;
     }
 
     setMessages = (jsonData) =>
     {
         this.messageReceived = true;
         let response = JSON.parse(jsonData.data);
-        this.messages = JSON.parse(response["messages"]);
+
+        // check if messages or an error was sent back
+        if(response["error"])
+            this.error = true;
+        else
+        {
+            this.messages = JSON.parse(response["messages"]);
+            this.error = false;
+        }
     }
 
     get getMessages()
@@ -30,7 +40,7 @@ export class socketConnection
     }
 
     sendMessage = () => {
-        this.socket.send("{\"room_id\": 1}");
+        this.socket.send("{\"room_id\": 1, \"Auth\": \""+getCookie("t")+"\"}");
     }
 
     awaitConnection = (callbackFunction) => {

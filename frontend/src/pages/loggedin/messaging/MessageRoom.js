@@ -16,6 +16,7 @@ export default function MessageRoom() {
     const [client,setClient] = useState(undefined);
     const [messages, setMessages] = useState(undefined);
     const [connected, setConnection] = useState(false);
+    const [error, setError] = useState(false);
     const chatLog = useRef();
 
     // start web socket connection
@@ -50,6 +51,7 @@ export default function MessageRoom() {
         client.listen((messageReceived)=>
         {
           setMessages(messageReceived);
+          setError(client.error);
           setConnection(true);
           setInterval(sendAndUpdate,1000);
         });
@@ -80,7 +82,10 @@ export default function MessageRoom() {
           <Container fluid>
             <Card>
                 {
-                  connected && displayMessage()
+                  !error && connected && displayMessage()
+                }
+                {
+                  error && <div>ERROR: COULD NOT CONNECT</div>
                 }
                 {
                   !connected && <Spinner aria-label = "loading-spinner" animation="border" variant="info" />

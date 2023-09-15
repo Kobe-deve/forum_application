@@ -33,35 +33,45 @@ public class WebSocketConnection extends TextWebSocketHandler  {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        // parse the incoming message as a JSON
         JsonObject parsedMessage = gson.fromJson(message.getPayload(), JsonObject.class);
-        
         int accessedRoom = parsedMessage.get("room_id").getAsInt();
-
+        String sendToken = parsedMessage.get("Auth").toString();
+        
         JsonObject responseMessage = new JsonObject();
 
-        ArrayList<JsonObject> messages = new ArrayList<JsonObject>();
-
-        System.out.println("SENT MESSAGE:" + message.toString());
-
-        for (Message i : MessageLogRepository.getMessages((long) accessedRoom)) 
+        // verify the JWT
+        if(sendToken.toString().equals("\"\"") == false)
         {
-            JsonObject specificMessage = new JsonObject();
-            
-            // if the sender is unknown, get it
-            if(i.getUsername() == null)
+            // if the JWT is verified, parse the room id and send back the chat information
+
+            ArrayList<JsonObject> messages = new ArrayList<JsonObject>();
+
+            //System.out.println("SENT MESSAGE:" + message.toString());
+
+            for (Message i : MessageLogRepository.getMessages((long) accessedRoom)) 
             {
-                User sender = UserRepository.findById(i.user_id).get();
-                i.setUsername(sender.username);
+                JsonObject specificMessage = new JsonObject();
+                
+                // if the sender is unknown, get it
+                if(i.getUsername() == null)
+                {
+                    User sender = UserRepository.findById(i.user_id).get();
+                    i.setUsername(sender.username);
+                }
+
+                specificMessage.addProperty("message_sender", i.getUsername());
+                specificMessage.addProperty("message_timeStamp", i.time_stamp.toString());
+                specificMessage.addProperty("message_text", i.text.toString());
+                
+                messages.add(specificMessage);
             }
 
-            specificMessage.addProperty("message_sender", i.getUsername());
-            specificMessage.addProperty("message_timeStamp", i.time_stamp.toString());
-            specificMessage.addProperty("message_text", i.text.toString());
-            
-            messages.add(specificMessage);
+            responseMessage.addProperty("messages", messages.toString());
         }
-
-        responseMessage.addProperty("messages", messages.toString());
+        else
+            responseMessage.addProperty("error", "Unauthorized");
+        
         session.sendMessage(new TextMessage(responseMessage.toString())); //sending message back to the client
     }
 
