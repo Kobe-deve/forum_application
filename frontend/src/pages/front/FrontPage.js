@@ -61,7 +61,10 @@ export default function FrontPage(){
         </div>
       }
       {
-        getCookie("user") && navigate("/home")
+        getCookie("user") &&
+        <div aria-label='front-page'>
+
+        </div> 
       }
       </>
       );

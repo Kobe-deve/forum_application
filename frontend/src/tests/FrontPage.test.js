@@ -3,7 +3,7 @@ import {BrowserRouter} from "react-router-dom";
 import FrontPage from '../pages/front/FrontPage';
 
 test('renders front page', () => {
-    render(<FrontPage />);
+    render(<BrowserRouter><FrontPage /></BrowserRouter>);
     const linkElement = screen.getByLabelText("front-page");
     expect(linkElement).toBeInTheDocument();
   });
