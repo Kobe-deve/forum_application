@@ -8,10 +8,8 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import Card from 'react-bootstrap/Card'
 import SignUp from './user/SignUp';
 import { getCookie } from '../../information/UserData';
-import { useNavigate } from 'react-router-dom';
 
-export default function FrontPage(){    
-    const navigate = useNavigate();
+export default function FrontPage(){ 
     const [action,setAction] = useState("");
     
     return(
