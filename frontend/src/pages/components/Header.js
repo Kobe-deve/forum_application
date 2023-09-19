@@ -13,7 +13,7 @@ export default function Header() {
     return(<div aria-label="header">
         <Navbar className="bg-body-tertiary" data-bs-theme="dark">
             
-                <Navbar.Brand aria-label = "logo" onClick={()=>{navigate("/")}}>
+                <Navbar.Brand aria-label = "logo" onClick={()=>{getCookie("user") ? navigate("/home") : navigate("/")}}>
                     <img src={logo} width="60" height="30" className="d-inline-block align-top" alt="ZanRooms Logo"/>
                     ZanRooms
                 </Navbar.Brand>
@@ -21,6 +21,7 @@ export default function Header() {
                     {!getCookie("user") && (<></>)}
 
                     {getCookie("user") && (<>
+                    <Nav.Link bg="light" onClick={()=>{}} aria-label="logout-button">Rooms</Nav.Link>
                     <Nav.Link bg="light" onClick={()=>{clearData(); navigate("/");}} aria-label="logout-button">Logout</Nav.Link></>)}
                 </Nav>
         </Navbar>

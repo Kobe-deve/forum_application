@@ -5,7 +5,7 @@ const ROUTES = [
         creditCheck: false,
         rateLimit: {
             windowMs: 15 * 60 * 1000,
-            max: 5
+            max: 15
         },
         proxy: {
             target: "http://localhost:8081/users/login",
