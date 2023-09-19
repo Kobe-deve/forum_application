@@ -22,9 +22,13 @@
 	Frontend: 3000 (modify 'start' command in forum_application\frontend\package.json)
 	Backend: 8081 (forum_application\backend\backend\src\main\resources\application.properties)
 	Database: 5432 (Postgres setup)
+	Gateway: 4000
 
 ### Running commands:
-
+	Gateway:
+		Run:
+			npm run start
+	
 	Frontend:
 		Run:
 			npm start 
@@ -47,6 +51,8 @@
 
 	-(Desktop) Frontend:
 		React/JavaScript
+	-Gateway	
+		NodeJS/Express
 	-Backend:
 		Spring Boot/Java
 	-Database:
@@ -62,3 +68,4 @@
 - https://medium.com/@davidtranwd/login-flow-with-react-and-redux-9a7d07be270e
 - https://tsh.io/blog/how-to-scale-websocket/
 - https://haris-zujo.medium.com/spring-cloud-gateway-request-filtering-and-redirection-9e4b6d559d1a
+- https://medium.com/geekculture/create-an-api-gateway-using-nodejs-and-express-933d1ca23322

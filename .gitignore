@@ -1,1 +1,3 @@
 .vscode/settings.json
+gateway/node_modules
+frontend/node_modules
