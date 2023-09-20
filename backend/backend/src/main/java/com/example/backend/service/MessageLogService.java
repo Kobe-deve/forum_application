@@ -26,6 +26,7 @@ public class MessageLogService {
         if(message.user_id != null && message.text != null && message.room_id != null && (UserRepository.findById(message.user_id) != null) && (RoomRepository.findByRoomId(message.room_id) != null) )
         {
             message.time_stamp = new Date();
+            message.setUsername(UserRepository.getReferenceById(message.user_id).username);
             return MessageLogRepository.save(message);
         }
         else
