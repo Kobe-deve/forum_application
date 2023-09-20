@@ -68,9 +68,9 @@ export default function MessageRoom() {
         if(Array.isArray(messages))
         {
             messages.forEach(element => {
-              element.message_timeStamp = new Date(element.message_timeStamp).toLocaleString();
+              element.time_stamp = new Date(element.time_stamp).toLocaleString();
     
-              element.sender = element.message_sender === getCookie("user");
+              element.sender = element.sender_name === getCookie("user");
               displayMessages.push(<div key={iterator++}>
                                     <Row className={element.sender ? "flex-row-reverse": ""}  style={{paddingLeft:15, paddingRight:15, paddingBottom:5, paddingTop:5}}>                                   
                                         <Message {...element}/>   

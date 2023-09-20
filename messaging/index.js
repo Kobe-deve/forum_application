@@ -19,13 +19,11 @@ wss.on('connection', async function connection(ws) {
 	  
 	});
     
-	const res = await client.query('Select * from message_log where room_id=1;')
-	console.log(res.rows)
+  ws.on('message', async function message(data) {
+	 const res = await client.query('Select * from message_log where room_id=1;')
+	 let response = {"messages": JSON.stringify(res.rows)}
+     console.log(response)
 	
-  ws.on('message', function message(data) {
-    
-	console.log('received: %s', data);
+	 ws.send(JSON.stringify(response));
   });
-
-  ws.send('something');
 });
