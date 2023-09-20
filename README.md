@@ -20,7 +20,8 @@
 	
 ### Local Hosting port setup
 	Frontend: 3000 (modify 'start' command in forum_application\frontend\package.json)
-	Backend: 8081 (forum_application\backend\backend\src\main\resources\application.properties)
+	Login/User Service: 8081 (forum_application\backend\backend\src\main\resources\application.properties)
+	Messaing Service: 8080
 	Database: 5432 (Postgres setup)
 	Gateway: 4000
 
@@ -34,8 +35,12 @@
 			npm start 
 		Test
 			npm test -- --coverage --watchAll=false
-			
-	Backend:
+	
+	Messaging Service:
+		Run:
+			node index.js
+	
+	Login/User Service:
 		Run:
 			gradlew bootRun
 		Test
@@ -53,7 +58,9 @@
 		React/JavaScript
 	-Gateway	
 		NodeJS/Express
-	-Backend:
+	-Messaing Service:
+		NodeJS
+	-Login/User Service:
 		Spring Boot/Java
 	-Database:
 		PostgreSQL
