@@ -18,7 +18,7 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
       
-  back-build:
+  user_service-build:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -42,7 +42,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./backend/backend
+        working-directory: ./user_service/backend
     env:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
