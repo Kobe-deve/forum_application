@@ -11,36 +11,37 @@
 
 ### Stack/Technologies:
 - (Desktop) Frontend:
-	React/JavaScript
+	- React/JavaScript
 - Gateway	
-	NodeJS/Express
+	- NodeJS
+	- Express
 - Messaing Service:
-	NodeJS
+	- NodeJS
 - Login/User Service:
-	Spring Boot/Java
+	- Spring Boot/Java
 - Database:
-	PostgreSQL
+	- PostgreSQL
 
 ### Running commands:
 - Gateway:
 	- Run:
-		npm run start
+		- ```npm run start```
 
 - Frontend:
 	- Run:
-		npm start 
+		- ```npm start```
 	- Test
-		npm test -- --coverage --watchAll=false
+		- ```npm test -- --coverage --watchAll=false```
 
 - Messaging Service:
 	- Run:
-		node index.js
+		- ```node index.js```
 
 - Login/User Service:
 	- Run:
-		gradlew bootRun
+		- ```gradlew bootRun```
 	- Test
-		gradlew test 
+		- ```gradlew test```
 
 ### Architecture (Initial/Simplified)
 ![Architecture](architecture.png)
