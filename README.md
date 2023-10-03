@@ -1,48 +1,46 @@
 # Overview: #
 
 ### A generalized chat web application allowing users to:  ###
-
-	* create an account
-	* log in
-	* enter rooms through public rooms or private rooms that can be accessed with a code
-	* send text messages in rooms
-	* send friend requests to users
-	* accept friend requests
-	* message users they are friends with
+* create an account
+* log in
+* enter rooms through public rooms or private rooms that can be accessed with a code
+* send text messages in rooms
+* send friend requests to users
+* accept friend requests
+* message users they are friends with
 
 ### Stack/Technologies:
-
-	-(Desktop) Frontend:
-		React/JavaScript
-	-Gateway	
-		NodeJS/Express
-	-Messaing Service:
-		NodeJS
-	-Login/User Service:
-		Spring Boot/Java
-	-Database:
-		PostgreSQL
+- (Desktop) Frontend:
+	React/JavaScript
+- Gateway	
+	NodeJS/Express
+- Messaing Service:
+	NodeJS
+- Login/User Service:
+	Spring Boot/Java
+- Database:
+	PostgreSQL
 
 ### Running commands:
-	Gateway:
-		Run:
-			npm run start
-	
-	Frontend:
-		Run:
-			npm start 
-		Test
-			npm test -- --coverage --watchAll=false
-	
-	Messaging Service:
-		Run:
-			node index.js
-	
-	Login/User Service:
-		Run:
-			gradlew bootRun
-		Test
-			gradlew test 
+- Gateway:
+	- Run:
+		npm run start
+
+- Frontend:
+	- Run:
+		npm start 
+	- Test
+		npm test -- --coverage --watchAll=false
+
+- Messaging Service:
+	- Run:
+		node index.js
+
+- Login/User Service:
+	- Run:
+		gradlew bootRun
+	- Test
+		gradlew test 
 
 ### Architecture (Initial/Simplified)
 ![Architecture](architecture.png)
