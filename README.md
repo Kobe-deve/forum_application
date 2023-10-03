@@ -1,4 +1,4 @@
-# Overview:
+# Overview: #
 
 ### A generalized chat web application allowing users to:  ###
 
