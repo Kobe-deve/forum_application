@@ -1,6 +1,6 @@
 import { getCookie } from "../../information/UserData";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/logo.png';
@@ -9,6 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(getCookie('user') === "")
+            navigate("/");
+    },[])
 
     return(<div aria-label="header">
         <Navbar className="bg-body-tertiary" data-bs-theme="dark">

@@ -1,5 +1,5 @@
-:: Backend
-cd backend/backend/
+:: User service
+cd user_service/backend/
 
 call gradlew
 

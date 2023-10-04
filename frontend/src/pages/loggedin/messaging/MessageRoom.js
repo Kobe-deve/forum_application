@@ -18,7 +18,7 @@ export default function MessageRoom() {
     const [connected, setConnection] = useState(false);
     const [error, setError] = useState(false);
     const chatLog = useRef();
-
+    
     // start web socket connection
     useEffect(()=>{
       setClient(new socketConnection());
