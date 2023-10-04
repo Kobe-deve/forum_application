@@ -13,7 +13,7 @@ export default function Header() {
     useEffect(()=>{
         if(getCookie('user') === "")
             navigate("/");
-    },[])
+    },[navigate])
 
     return(<div aria-label="header">
         <Navbar className="bg-body-tertiary" data-bs-theme="dark">
