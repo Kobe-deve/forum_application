@@ -14,6 +14,7 @@ import { getCookie } from '../../../information/UserData.js';
 export default function MessageRoom() {
     // socket client used 
     const [client,setClient] = useState(undefined);
+    const [typedMessage,setTypedMessage] = useState("");
     const [messages, setMessages] = useState(undefined);
     const [connected, setConnection] = useState(false);
     const [error, setError] = useState(false);
@@ -82,6 +83,13 @@ export default function MessageRoom() {
         return (<div ref={chatLog} style={{maxHeight: "70vh", overflowAnchor: "auto", flexDirection: "column-reverse", overflowX: "hidden"}} className="overflow-y-scroll">{displayMessages}</div>);
     }
 
+    const sendMessage = (e) => 
+    {
+      e.preventDefault();    
+      client.setMessage(typedMessage);
+      setTypedMessage("");
+    }
+
     return(
         <div style={{position: "relative", bottom: "10%", maxWidth: "100%"}} className="d-flex align-items-center justify-content-center text-center min-vh-100" aria-label='message-room'>
           <Container fluid>
@@ -95,10 +103,10 @@ export default function MessageRoom() {
                 {
                   !connected && <Spinner aria-label = "loading-spinner" animation="border" variant="info" />
                 }
-                <Form style={{backgroundColor:"blue"}}>
+                <Form style={{backgroundColor:"blue"}}  onSubmit={e => sendMessage(e)}>
                   <Row xs={2} md={2} lg={2} xxl={2}>
                     <Col style={{paddingRight: "0%",width:"80%"}}>
-                      <FormControl type="text" aria-label='message' onChange={e=> {}} placeholder='Type your message here'/>
+                      <FormControl type="text" name="typedMessage" aria-label='message' value={typedMessage} onChange={e=> {setTypedMessage(e.target.value)}} placeholder='Type your message here'/>
                     </Col>
 
                     <Col style={{paddingLeft: "0%", width:"20%"}}>

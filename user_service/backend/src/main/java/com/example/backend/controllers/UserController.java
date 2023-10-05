@@ -122,6 +122,12 @@ public class UserController {
         return returnData;
     }
 
+    @GetMapping("/getByUsername/{username}")
+    @ApiOperation(value = "{$UserController.getUserByUsername}", response = User.class, authorizations = {@Authorization(value="apiKey")})
+    public User getUserByUsername(@PathVariable("username") String username) {
+        return UserService.getUserByUsername(username);
+    }
+
     // Get user by ID
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "{$UserController.getUserById}", response = User.class, authorizations = {@Authorization(value="apiKey")})

@@ -1,6 +1,7 @@
 const { WebSocketServer }  = require('ws');
 const { Client } = require('pg')
 
+const backendEndpoint = "http://localhost:8081";
 const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', async function connection(ws) {
@@ -20,9 +21,50 @@ wss.on('connection', async function connection(ws) {
     
 	// response based on messages sent 
     ws.on('message', async function message(data) {
-		const res = await client.query('Select * from message_log where room_id=1;')
-		let response = {"messages": JSON.stringify(res.rows)}
+		let JSONdata = JSON.parse(data);
+		// TODO: verify jwt 
+		if(typeof JSONdata["room_id"] === 'number')
+		{
+			const res = await client.query('Select * from message_log where room_id='+JSONdata["room_id"]+';')
+			let response = {"messages": JSON.stringify(res.rows)}
 
-		ws.send(JSON.stringify(response));
-    });
+			ws.send(JSON.stringify(response));
+
+			// if there's a message being sent, go through process to send the message 
+			if(JSONdata["Message"])
+			{
+				// get user info 
+				await fetch(backendEndpoint+"/users/getByUsername/"+JSONdata["User"],
+				{
+					method: "GET",
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json;charset=UTF-8'
+					},
+				})
+				.then(async (response)=>{
+					let userData = await response.json();
+					let userID = userData["id"];
+					
+					let body = {
+						"room_id":JSONdata["room_id"], 
+						"text":JSONdata["Message"], 
+						"user_id":userID
+					}
+
+					console.log("SENT MESSAGE: " + JSON.stringify(body))
+					// send message 
+					await fetch(backendEndpoint+"/message/send",
+					{
+						method: "POST",
+						headers: {
+							'Accept': 'application/json, text/plain, */*',
+							'Content-Type': 'application/json;charset=UTF-8'
+						},
+						body: JSON.stringify(body)
+					})
+				})
+			}
+		}
+	});
 });

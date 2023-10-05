@@ -34,6 +34,15 @@ public class UserService {
         }
     }
 
+    // Get user by username
+    public User getUserByUsername(String username) {
+        User getUser = UserRepository.findByUsername(username).get(0);
+        if(getUser != null)
+            return getUser;
+        else
+            return null;
+    }
+
     // Get user by ID
     public User getUserById(Long id) {
         Optional<User> getUser = UserRepository.findById(id);

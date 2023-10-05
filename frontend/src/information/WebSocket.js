@@ -10,6 +10,7 @@ export class socketConnection
         this.messageReceived = false;
         this.error = false;
         this.connectionTime = null;
+        this.sentMessage = "";
     }
 
     setMessages = (jsonData) =>
@@ -25,6 +26,11 @@ export class socketConnection
             this.messages = JSON.parse(response["messages"]);
             this.error = false;
         }
+    }
+
+    setMessage = (messageContent) =>
+    {
+        this.sentMessage = messageContent;
     }
 
     get getMessages()
@@ -48,7 +54,13 @@ export class socketConnection
 
     sendMessage = () => {
         if(!this.error && this.socket.readyState === 1)
-            this.socket.send("{\"room_id\": 1, \"Auth\": \""+getCookie("user")+"\"}");
+        {
+            if(this.sentMessage === undefined)
+                this.sentMessage = "";
+            this.socket.send("{\"room_id\": 1, \"User\": \""+getCookie("user")+"\", \"Auth\": \""+getCookie("user")+"\", \"Message\": \""+this.sentMessage+"\"}");
+            // if sent message is used, set it back to empty is it isn't sent 
+            this.sentMessage = "";
+        }
     }
 
     awaitConnection = (callbackFunction) => {
