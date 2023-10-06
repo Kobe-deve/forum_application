@@ -11,7 +11,7 @@ import {socketConnection} from '../../../information/WebSocket.js';
 import Message from '../../components/messaging/Message.js';
 import { getCookie } from '../../../information/UserData.js';
 
-export default function MessageRoom() {
+export default function MessageRoom({room_id}) {
     // socket client used 
     const [client,setClient] = useState(undefined);
     const [typedMessage,setTypedMessage] = useState("");
@@ -22,10 +22,10 @@ export default function MessageRoom() {
     
     // start web socket connection
     useEffect(()=>{
-      setClient(new socketConnection());
+      setClient(new socketConnection(room_id));
       // set scrollbar to bottom
       scrollToBottom();
-    },[]);
+    },[room_id]);
 
     const scrollToBottom = () => {
       if (chatLog.current) {

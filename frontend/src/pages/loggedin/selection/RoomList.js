@@ -6,14 +6,18 @@ import { roomListFetcher } from "../../../functions/information/GetRoomInfo";
 import Col from "react-bootstrap/Col";
 import Card  from "react-bootstrap/Card";
 import * as Icon from 'react-bootstrap-icons';
+import { useNavigate } from "react-router-dom";
 
-export default function RoomList()
+
+
+export default function RoomList({setRoomIDFunction})
 {
   const [dataFetcher,setDataFetcher] = useState(undefined);
   const [loadingData,setLoadingStatus] = useState(true);
   const [roomList,setRoomList] = useState([]);
   const [loadedRooms,setRoomStatus] = useState(false);
   const [errorDetected,setErrorDetected] = useState(false);
+  const navigate = useNavigate();
   
   useEffect(()=>{
     if(!dataFetcher)
@@ -46,7 +50,7 @@ export default function RoomList()
     {
       roomList.forEach(element => {
         displayRoomsList.push(
-        <div onClick={()=>{console.log(element.roomName)}} key={iterator++} style={{padding:3}}>
+        <div onClick={()=>{setRoomIDFunction(element.id);navigate("/messages")}} key={iterator++} style={{padding:3}}>
           <Card style={{padding: 10}}> 
             <div align="left">
               {element.roomName}

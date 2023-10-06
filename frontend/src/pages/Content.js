@@ -9,10 +9,13 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import MessageRoom from "./loggedin/messaging/MessageRoom.js";
 import RoomList from "./loggedin/selection/RoomList.js";
+import { getCookie } from "../information/UserData.js";
 
 export default function Content(){
     const [loading, setLoading] = useState(true);
     const { pathname } = useLocation();
+    const [room_id, setRoomID] = useState(undefined);
+
     useLayoutEffect(() => {
         setLoading(true);
         const timer = setTimeout(() => {
@@ -21,6 +24,11 @@ export default function Content(){
         return () => clearTimeout(timer);
     }, [pathname]);
     
+    function setRoomIdCallback(id)
+    {
+        setRoomID(id)
+    }
+
     return(loading ? 
             <div className="d-flex align-items-center justify-content-center text-center min-vh-100">
                 <Container fluid>
@@ -34,11 +42,11 @@ export default function Content(){
             :
             <>
                 <Routes>
-                    <Route index element={<FrontPage />} />
+                    <Route index element={getCookie('user') === "" ? <FrontPage /> : <Home />} />
                     <Route path="home" element={<Home />} />
-                    <Route path="messages" element={<MessageRoom />} />
+                    <Route path="messages" element={<MessageRoom room_id={room_id}/>} />
                     <Route path="*" element={<NoPage />} />
-                    <Route path="rooms" element={<RoomList/>}/>
+                    <Route path="rooms" element={<RoomList setRoomIDFunction={setRoomIdCallback}/>}/>
                 </Routes>
             </>
     );

@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     // creation date of the room 
     public Date time_created;
