@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Row from "react-bootstrap/esm/Row";
-import Spinner from "react-bootstrap/esm/Spinner";
-import Container from "react-bootstrap/esm/Container";
+import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
+import Container from "react-bootstrap/Container";
 import { roomListFetcher } from "../../../functions/information/GetRoomInfo";
-import Col from "react-bootstrap/esm/Col";
-import Card  from "react-bootstrap/esm/Card";
+import Col from "react-bootstrap/Col";
+import Card  from "react-bootstrap/Card";
 import * as Icon from 'react-bootstrap-icons';
 
 export default function RoomList()
