@@ -1,7 +1,6 @@
 import * as AuthenticationInfo from '../../information/Authentication'
 import * as EndpointInfo from '../../information/Endpoints'
-import { setUserData } from '../../information/UserData';
-import { getCookie } from '../../information/UserData';
+import { setUserData,getCookie } from '../../information/UserData';
 
 // verifying jwt token
 export async function callAuth(token, callback)

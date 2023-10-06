@@ -18,4 +18,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     // get room by id 
     @Query(value = "SELECT * FROM forum_room WHERE id = ?1", nativeQuery=true)
     Room findByRoomId(Long id);
+
+    // get public rooms 
+    @Query(value = "SELECT * FROM forum_room WHERE status=0",nativeQuery=true)
+    List<Room> getPublicRooms();
 }

@@ -23,6 +23,8 @@ wss.on('connection', async function connection(ws) {
     ws.on('message', async function message(data) {
 		let JSONdata = JSON.parse(data);
 		// TODO: verify jwt 
+
+		// get room information
 		if(typeof JSONdata["room_id"] === 'number')
 		{
 			const res = await client.query('Select * from message_log where room_id='+JSONdata["room_id"]+';')

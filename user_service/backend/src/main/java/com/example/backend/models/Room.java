@@ -15,9 +15,6 @@ public class Room {
 
     // creation date of the room 
     public Date time_created;
-
-    // id for message log
-    public Long message_log_id;
     
     // room status 
     public activeStatus status;

@@ -6,5 +6,6 @@ var socketHost = "ws://localhost:8080"
 export var urls = {
     "LOGIN": host+"/login",
     "SIGNUP": host+"/signup",
-    "MESSAGE_ROOM":socketHost
+    "MESSAGE_ROOM":socketHost,
+    "ROOM_LIST":host+"/rooms"
 };

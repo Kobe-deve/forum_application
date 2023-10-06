@@ -42,7 +42,19 @@ const ROUTES = [
                 [`^/socket`]: '',
             },
         }
-    }
+    },
+    {
+        url: '/rooms',
+        auth: false,
+        creditCheck: false,
+        proxy: {
+            target: "http://localhost:8081/rooms/publicRooms",
+            changeOrigin: true,
+            pathRewrite: {
+                [`^/rooms`]: '',
+            },
+        }
+    },
 ]
 
 /*

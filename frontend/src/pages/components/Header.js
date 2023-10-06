@@ -26,7 +26,8 @@ export default function Header() {
                     {!getCookie("user") && (<></>)}
 
                     {getCookie("user") && (<>
-                    <Nav.Link bg="light" onClick={()=>{}} aria-label="room-button">Rooms</Nav.Link>
+                    <Nav.Link bg="light" onClick={()=>{navigate("/home");}} aria-label="room-button">Home</Nav.Link>
+                    <Nav.Link bg="light" onClick={()=>{navigate("/rooms");}} aria-label="room-button">Rooms</Nav.Link>
                     <Nav.Link bg="light" onClick={()=>{clearData(); navigate("/");}} aria-label="logout-button">Logout</Nav.Link></>)}
                 </Nav>
         </Navbar>

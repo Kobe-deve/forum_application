@@ -1,5 +1,7 @@
 package com.example.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,13 @@ public class RoomController {
     public Room getRoomById(@PathVariable("room_id") Long id)
     {
         return RoomService.findByRoomId(id);
+    }
+
+    // Get list of available rooms 
+    @GetMapping("/publicRooms")
+    public List<Room> getRooms()
+    {
+        return RoomService.getPublicRooms();
     }
 
     // Create a new room

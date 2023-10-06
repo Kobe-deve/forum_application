@@ -3,7 +3,8 @@ import { getCookie } from "./UserData";
 
 export class socketConnection 
 {
-    constructor() {
+    constructor(room_id) {
+        this.roomConnection = room_id
         this.socket = null;
         this.connected = false;
         this.messages = null;
@@ -57,7 +58,7 @@ export class socketConnection
         {
             if(this.sentMessage === undefined)
                 this.sentMessage = "";
-            this.socket.send("{\"room_id\": 1, \"User\": \""+getCookie("user")+"\", \"Auth\": \""+getCookie("user")+"\", \"Message\": \""+this.sentMessage+"\"}");
+            this.socket.send("{\"room_id\": "+this.roomConnection+", \"User\": \""+getCookie("user")+"\", \"Auth\": \""+getCookie("user")+"\", \"Message\": \""+this.sentMessage+"\"}");
             // if sent message is used, set it back to empty is it isn't sent 
             this.sentMessage = "";
         }
