@@ -20,7 +20,7 @@ test('app renders when there is login data', async () => {
   render(<App />);
 
   await waitFor(() => {
-    const linkElement = screen.getByLabelText("front-page");
+    const linkElement = screen.getByLabelText("home");
     expect(linkElement).toBeInTheDocument();
   },{timeout:3000});
 });

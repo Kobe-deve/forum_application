@@ -11,7 +11,7 @@ beforeEach(() => {
 })
 
 test('renders message room page', () => {
-    render(<MessageRoom />);
+    render(<MessageRoom room_id={0} />);
     const linkElement = screen.getByLabelText("message-room");
     expect(linkElement).toBeInTheDocument();
   });

@@ -4,7 +4,6 @@ import { getCookie } from "./UserData";
 export class socketConnection 
 {
     constructor(room_id) {
-        console.log(room_id)
         this.roomConnection = room_id
         this.socket = null;
         this.connected = false;

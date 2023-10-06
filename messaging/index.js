@@ -54,7 +54,6 @@ wss.on('connection', async function connection(ws) {
 						"user_id":userID
 					}
 
-					console.log("SENT MESSAGE: " + JSON.stringify(body))
 					// send message 
 					await fetch(backendEndpoint+"/message/send",
 					{
